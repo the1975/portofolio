@@ -1,0 +1,552 @@
+/* ==========================================================
+   STYLE.CSS - Portfolio Leonardo
+   ----------------------------------------------------------
+   DAFTAR ISI (cari pakai Ctrl+F nomor section):
+   01. Bingkai & background
+   02. Animasi muncul saat scroll (.reveal)
+   03. Komponen kecil (tag, social-btn, gallery-img)
+   04. Hero: dekorasi, label, glitch headline
+   05. Hero: chip mindset melayang
+   06. About: kartu bertumpuk & kata menyala
+   07. Skills: ikon tech stack
+   08. Skills: sertifikat (coverflow)
+   09. Projects: tumpukan screenshot
+   10. GitHub contributions
+   11. Contact: judul loncat, ikon, popup, form
+   ----------------------------------------------------------
+   Catatan: @theme dan base style Tailwind ada di <head> index.html
+   (harus di sana karena Tailwind browser hanya memproses
+   <style type="text/tailwindcss">).
+   ========================================================== */
+
+
+/* ==========================================================
+   01. BINGKAI & BACKGROUND
+   ========================================================== */
+.frame-bg {
+  background-image: url('../img/e63f7076d14f045756ddadcbdb7d8dd7.jpg'); /* path naik 1 folder karena file ini di /css */
+  background-size: 480px;
+  background-attachment: fixed;
+}
+
+
+/* ==========================================================
+   02. ANIMASI MUNCUL SAAT SCROLL
+   Class .show ditambahkan oleh JS (js/script.js bagian 01)
+   ========================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-reveal,
+  .animate-marquee { animation: none; }
+}
+
+
+/* ==========================================================
+   03. KOMPONEN KECIL
+   ========================================================== */
+
+/* Label teknologi di kartu project */
+.tag {
+  padding: .25rem .75rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  font: 10px "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+}
+
+/* Tombol sosmed bulat di hero */
+.social-btn {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: .75rem;
+  border: 1px solid rgba(28, 28, 28, .15);
+  background: rgba(255, 255, 255, .5);
+  transition: background-color .2s, color .2s;
+}
+.social-btn:hover { background: #1c1c1c; color: #e8e8e4; }
+
+/* Foto di galeri Moments */
+.gallery-img {
+  flex-shrink: 0;
+  width: 18rem;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  filter: grayscale(1);
+  transition: filter .5s;
+}
+.gallery-img:hover { filter: grayscale(0); }
+
+
+/* ==========================================================
+   04. HERO: DEKORASI, LABEL, GLITCH HEADLINE
+   ========================================================== */
+
+/* --- Lingkaran dekoratif di belakang foto --- */
+.hero-decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-decoration::before,
+.hero-decoration::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.hero-decoration::before {
+  width: 520px;
+  height: 520px;
+  right: 8%;
+  border: 1px solid rgba(28, 28, 28, .18);
+}
+.hero-decoration::after {
+  width: 360px;
+  height: 360px;
+  right: 13%;
+  border: 1px solid rgba(28, 28, 28, .10);
+}
+
+/* --- Label kecil "WEB × DATA" dan "SYSTEM / 01" --- */
+.hero-label {
+  position: absolute;
+  z-index: 0;
+  font: 600 9px "JetBrains Mono", monospace;
+  letter-spacing: .18em;
+  color: rgba(28, 28, 28, .45);
+  white-space: nowrap;
+}
+.hero-label-1 { top: 20%;    left: 7%; }
+.hero-label-2 { bottom: 12%; left: 7%; }
+
+/* --- Glitch headline "Hi, I'm Leonardo." ---
+   Class .glitch-active ditoggle oleh JS (js/script.js bagian 11) */
+.hero-glitch {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+.hero-glitch::before,
+.hero-glitch::after {
+  content: attr(data-text);      /* teks diambil dari atribut data-text di HTML */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1;
+}
+.hero-glitch::before { color: #8b0000; transform: translateX(-3px); }  /* layer merah */
+.hero-glitch::after  { color: #004c99; transform: translateX(3px); }   /* layer biru */
+
+.hero-glitch.glitch-active::before { animation: glitchRed .18s steps(2) both; }
+.hero-glitch.glitch-active::after  { animation: glitchBlue .18s steps(2) both; }
+
+@keyframes glitchRed {
+  0%   { opacity: 0;  clip-path: inset(0 0 70% 0);   transform: translateX(-3px); }
+  20%  { opacity: .8; clip-path: inset(10% 0 55% 0); transform: translateX(-5px); }
+  40%  { opacity: .7; clip-path: inset(25% 0 35% 0); transform: translateX(-2px); }
+  70%  { opacity: .5; clip-path: inset(55% 0 15% 0); transform: translateX(-4px); }
+  100% { opacity: 0;  clip-path: inset(70% 0 5% 0);  transform: translateX(-3px); }
+}
+@keyframes glitchBlue {
+  0%   { opacity: 0;  clip-path: inset(60% 0 10% 0); transform: translateX(3px); }
+  20%  { opacity: .7; clip-path: inset(45% 0 25% 0); transform: translateX(5px); }
+  40%  { opacity: .6; clip-path: inset(30% 0 40% 0); transform: translateX(2px); }
+  70%  { opacity: .5; clip-path: inset(10% 0 65% 0); transform: translateX(4px); }
+  100% { opacity: 0;  clip-path: inset(5% 0 75% 0);  transform: translateX(3px); }
+}
+
+/* --- Glitch ringan yang jalan bareng (label + chip), tiap 8 detik --- */
+.hero-label,
+.hero-chip-glitch {
+  animation: syncGlitch 8s infinite;
+}
+@keyframes syncGlitch {
+  0%, 91%, 100% { transform: translate(0, 0);   filter: none; }
+  92%           { transform: translate(-2px, 0); filter: contrast(1.15); }
+  93%           { transform: translate(2px, 0);  filter: contrast(1.3); }
+  94%           { transform: translate(-1px, 0); filter: contrast(1.15); }
+  95%           { transform: translate(0, 0);    filter: none; }
+}
+
+/* --- Mobile: dekorasi disembunyikan, posisi label disesuaikan --- */
+@media (max-width: 768px) {
+  .hero-decoration { display: none; }
+  .hero-label      { animation: none; }
+  .hero-label-1    { top: 13%;    left: 7%; }
+  .hero-label-2    { bottom: 4%;  left: 7%; }
+}
+
+
+/* ==========================================================
+   05. HERO: CHIP MINDSET MELAYANG
+   ========================================================== */
+
+/* 1. Base chip */
+.hero-chip-glitch {
+  width: max-content;
+  height: auto;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  /* transisi saat chip pindah posisi */
+  transition:
+    left   .5s cubic-bezier(.22, 1, .36, 1),
+    right  .5s cubic-bezier(.22, 1, .36, 1),
+    top    .5s cubic-bezier(.22, 1, .36, 1),
+    bottom .5s cubic-bezier(.22, 1, .36, 1);
+}
+.hero-chip-glitch span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 2. Melayang naik-turun: pakai `translate` supaya tidak bentrok dengan glitch (`transform`) */
+@keyframes float-y {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -8px; }
+}
+.hero-chip-glitch.float-slow   { animation: float-y 5s ease-in-out infinite,       syncGlitch 8s infinite; }
+.hero-chip-glitch.float-slower { animation: float-y 6.5s ease-in-out -2s infinite, syncGlitch 8s infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-chip-glitch.float-slow,
+  .hero-chip-glitch.float-slower { animation: none; }
+}
+
+/* 3. Glitch sesaat ketika chip diklik (HARUS di bawah float, supaya menang) */
+.hero-chip-glitch.mindset-change { animation: mindsetChipChange .4s steps(2) both; }
+@keyframes mindsetChipChange {
+  0%   { transform: translate(0);      filter: none; }
+  25%  { transform: translate(-3px,0); filter: contrast(1.4); }
+  50%  { transform: translate(3px,0);  filter: contrast(1.7); }
+  75%  { transform: translate(-1px,0); }
+  100% { transform: translate(0);      filter: none; }
+}
+
+/* 4. Chip tidak ditampilkan di HP */
+@media (max-width: 768px) {
+  .hero-chip-glitch { display: none !important; }
+}
+
+
+/* ==========================================================
+   06. ABOUT: KARTU BERTUMPUK & KATA MENYALA
+   ========================================================== */
+.about-section { background: #0e1116; }
+
+/* Kartu menumpuk saat scroll (transform diatur JS bagian 04) */
+.stack-card {
+  position: sticky;
+  transform-origin: 50% 0;
+  will-change: transform;
+}
+/* Lapisan gelap yang makin pekat saat kartu tertimpa */
+.stack-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  border-radius: inherit;
+  background: #000;
+  opacity: var(--dim, 0);
+  pointer-events: none;
+}
+
+/* Kata-kata paragraf About (opacity diatur JS bagian 10) */
+.about-word { display: inline-block; opacity: .15; will-change: opacity, transform; }
+#aboutText b { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-word { opacity: 1 !important; transform: none !important; }
+}
+
+
+/* ==========================================================
+   07. SKILLS: IKON TECH STACK
+   ========================================================== */
+.tech-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: .75rem;
+  border: 1px solid rgba(232, 232, 228, .15);
+  background: rgba(232, 232, 228, .03);
+  transition: background-color .3s, border-color .3s, transform .3s;
+}
+.tech-icon img {
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: grayscale(1);
+  opacity: .75;
+  transition: filter .3s, opacity .3s;
+}
+.tech-icon:hover {
+  background: rgba(232, 232, 228, .08);
+  border-color: rgba(232, 232, 228, .35);
+  transform: translateY(-3px);
+}
+.tech-icon:hover img { filter: none; opacity: 1; }
+
+/* Tooltip nama teknologi */
+.tech-tip {
+  position: absolute;
+  bottom: calc(100% + .5rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: .25rem .5rem;
+  border-radius: .375rem;
+  background: #e8e8e4;
+  color: #1c1c1c;
+  font: 10px "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+}
+.tech-icon:hover .tech-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/* ==========================================================
+   08. SKILLS: SERTIFIKAT (COVERFLOW)
+   Posisi kartu diatur JS bagian 06 (fungsi layout)
+   ========================================================== */
+.cert-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .6);
+  transition: transform .7s cubic-bezier(.22, 1, .36, 1), opacity .5s ease, filter .5s ease;
+  will-change: transform;
+}
+.cert-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#certInfo { transition: opacity .25s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-card { transition: none; }
+}
+
+
+/* ==========================================================
+   09. PROJECTS: TUMPUKAN SCREENSHOT
+   Kartu dibuat oleh JS bagian 09 dari atribut data-shots
+   ========================================================== */
+.shot-stage {
+  position: relative;
+  margin-top: 2rem;                      /* ruang untuk kartu belakang yang mengintip */
+  padding-bottom: calc(62.5% + 36px);    /* rasio 16:10 + tinggi bar jendela */
+  touch-action: pan-y;
+  cursor: pointer;
+  outline: none;
+}
+.shot-stage:focus-visible { outline: 2px solid rgba(28, 28, 28, .4); outline-offset: 8px; border-radius: 1rem; }
+
+.shot-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(28, 28, 28, .12);
+  background: #0e1116;
+  box-shadow: 0 25px 50px -20px rgba(0, 0, 0, .35);
+  transform-origin: top center;
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1), opacity .4s ease;
+  will-change: transform, opacity;
+}
+
+/* Bar jendela browser mini (3 titik + label) */
+.shot-bar { display: flex; align-items: center; gap: .375rem; height: 36px; padding: 0 1rem; background: #1c1c1c; }
+.shot-bar i { width: .625rem; height: .625rem; border-radius: 9999px; background: rgba(232, 232, 228, .2); }
+.shot-bar span { margin-left: .75rem; font: 10px "JetBrains Mono", monospace; letter-spacing: .1em; color: rgba(232, 232, 228, .4); }
+.shot-card img { display: block; width: 100%; height: calc(100% - 36px); object-fit: cover; object-position: top; }
+
+/* Tampil kalau file gambar tidak ketemu */
+.shot-card.no-img::after {
+  content: 'PREVIEW PROJECT';
+  position: absolute;
+  inset: 36px 0 0 0;
+  display: grid;
+  place-items: center;
+  font: 10px "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  color: rgba(232, 232, 228, .3);
+}
+
+/* Tombol panah + penanda angka */
+.shot-ui { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; }
+.shot-btns { display: flex; gap: .5rem; }
+.shot-btn {
+  width: 2.5rem; height: 2.5rem; border-radius: 9999px;
+  border: 1px solid rgba(28, 28, 28, .25);
+  background: transparent; color: inherit; cursor: pointer;
+  display: grid; place-items: center;
+  transition: background-color .3s, color .3s;
+}
+.shot-btn:hover { background: #1c1c1c; color: #e8e8e4; }
+.shot-btn svg { width: 1rem; height: 1rem; }
+.shot-count { font: 11px "JetBrains Mono", monospace; letter-spacing: .1em; color: rgba(28, 28, 28, .5); }
+
+@media (prefers-reduced-motion: reduce) {
+  .shot-card { transition: none; }
+}
+
+
+/* ==========================================================
+   10. GITHUB CONTRIBUTIONS
+   Kotak dibuat oleh JS bagian 07. Ukuran lewat variabel --cell
+   ========================================================== */
+.gh-cell {
+  display: block;
+  width: var(--cell, 12px);
+  height: var(--cell, 12px);
+  border-radius: calc(var(--cell, 12px) * .25);
+  background: rgba(232, 232, 228, .08);       /* level 0 */
+}
+.gh-cell[data-level="1"] { background: #0e4429; }
+.gh-cell[data-level="2"] { background: #006d32; }
+.gh-cell[data-level="3"] { background: #26a641; }
+.gh-cell[data-level="4"] { background: #39d353; }
+.gh-cell:hover { outline: 1px solid rgba(232, 232, 228, .6); }
+
+
+/* ==========================================================
+   11. CONTACT
+   ========================================================== */
+
+/* --- Judul "Let's work together": huruf loncat --- */
+.bounce-word { display: inline-block; white-space: nowrap; }
+.bounce-ch {
+  display: inline-block;
+  animation: hop 2.8s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 70ms);     /* --i diisi JS bagian 08 */
+  will-change: transform;
+}
+@keyframes hop {
+  0%, 55%, 100% { transform: translateY(0) rotate(0); }
+  12% { transform: translateY(-.16em) rotate(-4deg); }
+  24% { transform: translateY(0) rotate(3deg); }
+  34% { transform: translateY(-.06em) rotate(0); }
+  44% { transform: translateY(0); }
+}
+/* Kursor di atas judul: huruf bergetar */
+.bounce-title:hover .bounce-ch {
+  animation: shake .35s linear infinite;
+  animation-delay: calc(var(--i) * -37ms);
+}
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  20% { transform: translate(-.02em, -.04em) rotate(-3deg); }
+  40% { transform: translate(.03em, .02em) rotate(2deg); }
+  60% { transform: translate(-.02em, .03em) rotate(-2deg); }
+  80% { transform: translate(.02em, -.03em) rotate(3deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bounce-ch { animation: none !important; }
+}
+
+/* --- Ikon kontak bulat --- */
+.contact-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(232, 232, 228, .3);
+  color: #e8e8e4;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color .3s, color .3s, transform .3s;
+}
+.contact-icon:hover { background: #e8e8e4; color: #1c1c1c; transform: translateY(-4px); }
+.contact-icon svg { width: 1.25rem; height: 1.25rem; }
+
+.contact-tip {
+  position: absolute;
+  bottom: calc(100% + .6rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: .25rem .5rem;
+  border-radius: .375rem;
+  background: #e8e8e4;
+  color: #1c1c1c;
+  font: 10px "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+}
+.contact-icon:hover .contact-tip,
+.contact-icon:focus-visible .contact-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* --- Popup (dialog) Email & WhatsApp --- */
+dialog.contact-modal {
+  margin: auto;
+  width: min(92vw, 640px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 0;
+  border: 1px solid rgba(232, 232, 228, .12);
+  border-radius: 1.25rem;
+  background: #1c1c1c;
+  color: #e8e8e4;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+}
+dialog.contact-modal[open] { animation: modal-in .3s ease both; }
+dialog.contact-modal::backdrop { background: rgba(0, 0, 0, .6); backdrop-filter: blur(6px); }
+dialog.contact-modal[open]::backdrop { animation: modal-fade .3s ease both; }
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(16px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes modal-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- Input form --- */
+.form-field {
+  width: 100%;
+  border-radius: .75rem;
+  border: 1px solid rgba(232, 232, 228, .2);
+  background: transparent;
+  padding: .75rem 1rem;
+  font-size: .875rem;
+  color: inherit;
+  outline: none;
+  transition: border-color .2s;
+}
+.form-field::placeholder { color: rgba(232, 232, 228, .3); }
+.form-field:focus { border-color: rgba(232, 232, 228, .7); }

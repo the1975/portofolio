@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leonardo Yanuarianto | Portfolio</title>
+
+  <!-- Tailwind CSS v4 (versi browser/CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Google Fonts: Manrope, Space Grotesk, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+  <!-- Tema Tailwind: font, warna, animasi.
+       Harus inline karena hanya <style type="text/tailwindcss"> yang diproses Tailwind. -->
+  <style type="text/tailwindcss">
+    @theme {
+      --font-sans: "Manrope", sans-serif;
+      --font-serif: "Space Grotesk", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --font-tech: "Space Grotesk", sans-serif;
+
+      --color-paper: #e8e8e4;
+      --color-ink: #1c1c1c;
+      --color-night: #0e1116;
+
+      --animate-marquee: marquee 35s linear infinite;
+      --animate-reveal: reveal 1.2s cubic-bezier(.77, 0, .18, 1) both;
+
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+      @keyframes reveal {
+        from { clip-path: inset(-20% 100% -20% -5%); }
+        to   { clip-path: inset(-20% -5% -20% -5%); }
+      }
+    }
+
+    /* Base style: ditaruh di layer base supaya class seperti font-light tetap menang */
+    @layer base {
+      body { font-synthesis-style: none; }
+      .font-serif { letter-spacing: -0.03em; font-weight: 600; }
+      em { font-style: normal; }
+    }
+  </style>
+
+  <!-- CSS custom (daftar isi ada di dalam file) -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="font-sans text-ink">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="fixed top-5 md:top-9 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-3.5rem)] max-w-4xl">
+    <div class="flex items-center justify-between rounded-2xl bg-white/80 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,.08)] px-5 py-3">
+
+      <!-- Logo -->
+      <a href=" " class="flex items-center gap-3">
+        <span class="w-7 h-7 rounded-full bg-ink text-paper grid place-items-center font-serif italic text-sm">L</span>
+        <span class="font-mono text-[11px] tracking-widest">LEONARDO</span>
+      </a>
+
+      <!-- Menu (hanya tampil di desktop) -->
+      <nav class="hidden md:flex gap-8 font-mono text-xs tracking-widest">
+        <a href="#about" class="hover:opacity-50 transition">ABOUT</a>
+        <a href="#skills" class="hover:opacity-50 transition">SKILLS</a>
+        <a href="#projects" class="hover:opacity-50 transition">PROJECTS</a>
+        <a href="#gallery" class="hover:opacity-50 transition">GALLERY</a>
+      </nav>
+
+      <!-- Tombol Hire Me -->
+      <a href="#contact" class="border border-ink rounded-xl font-mono text-xs px-4 py-2 hover:bg-ink hover:text-paper transition">Hire Me</a>
+
+    </div>
+  </header>
+
+
+  <!-- ================= BINGKAI + KARTU UTAMA ================= -->
+  <div class="frame-bg p-3 md:p-6">
+    <main class="space-y-6">
+
+
+      <!-- ============ HERO ============ -->
+      <section
+        class="hero relative md:min-h-screen bg-paper rounded-3xl overflow-hidden px-6 md:px-16 pt-36 pb-16 grid md:grid-cols-2 gap-8 md:gap-12 items-center shadow-2xl"
+        style="background: radial-gradient(circle 420px at 72% 50%, #bfc1c1 0%, #e8e8e4 38%, #f2f2f0 72%, #fafafa 100%);">
+
+        <!-- Dekorasi: lingkaran + label kecil -->
+        <div class="hero-decoration" aria-hidden="true">
+          <span class="hero-label hero-label-1">WEB × DATA</span>
+          <span class="hero-label hero-label-2">SYSTEM / 01</span>
+        </div>
+
+        <!-- Dekorasi: grid garis tipis -->
+        <div class="pointer-events-none absolute inset-0"
+             style="background-image: linear-gradient(rgba(28,28,28,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(28,28,28,.045) 1px, transparent 1px);
+                    background-size: 56px 56px;
+                    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 45%, #000 20%, transparent 75%);
+                    mask-image: radial-gradient(ellipse 70% 60% at 70% 45%, #000 20%, transparent 75%);"></div>
+
+        <!-- Kolom kiri: teks -->
+        <div class="relative z-10">
+
+          <p class="font-mono text-xs tracking-widest text-ink/50 mb-4">NGANJUK · INDONESIA</p>
+
+          <!-- Headline (data-text dipakai efek glitch di CSS) -->
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[0.95] hero-glitch" data-text="Hi, I'm Leonardo.">
+            <span class="block animate-reveal font-normal">Hi, I'm</span>
+            <em class="block animate-reveal" style="animation-delay: .4s">Leonardo.</em>
+          </h1>
+
+          <!-- Teks typing (diisi JS section 03) -->
+          <p class="mt-5 font-mono text-lg md:text-xl tracking-wide text-ink/70 min-h-[2.5rem]">
+            <span class="text-ink/30">&gt;</span>
+            <span id="typed"></span><span class="inline-block w-[10px] h-5 bg-ink ml-1 align-middle animate-pulse"></span>
+          </p>
+
+          <!-- Tombol CV -->
+          <div class="mt-8">
+            <!-- TODO: ganti ISI_FILE_ID dengan ID file CV di Google Drive -->
+            <a href="https://drive.google.com/file/d/ISI_FILE_ID/view?usp=sharing" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-3 bg-ink text-paper font-mono text-xs tracking-widest px-6 py-3 rounded-full hover:scale-105 transition">
+              DOWNLOAD CV
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Sosmed -->
+          <div class="mt-12 pt-6 border-t border-ink/10 max-w-sm">
+            <p class="font-mono text-[10px] tracking-widest text-ink/50 mb-3">CONNECT</p>
+
+            <div class="flex gap-3">
+
+              <!-- Instagram -->
+              <a href="https://instagram.com/leonardoyanuarianto" target="_blank" rel="noopener" aria-label="Instagram" class="social-btn">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+
+              <!-- GitHub -->
+              <a href="https://github.com/the1975" target="_blank" rel="noopener" aria-label="GitHub" class="social-btn">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                  <path d="M9 18c-4.51 2-5-2-7-2"/>
+                </svg>
+              </a>
+
+              <!-- LinkedIn -->
+              <a href="https://linkedin.com/in/leonardoyanuarianto" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-btn">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom kanan: foto + chip mindset melayang -->
+        <div class="relative order-first md:order-none w-full max-w-[200px] sm:max-w-[260px] md:max-w-sm justify-self-center md:justify-self-end">
+
+          <!-- Foto -->
+          <div class="reveal relative bg-ink rounded-3xl aspect-[4/5] md:aspect-[3/4] overflow-hidden shadow-2xl">
+            <img src="img/karina.jpeg" alt="Foto Leonardo" class="w-full h-full object-cover object-top grayscale">
+
+            <div class="absolute bottom-4 inset-x-4 hidden sm:flex bg-black/60 backdrop-blur rounded-xl px-4 py-3 text-paper items-center justify-between">
+              <div>
+                <p class="text-xs font-semibold">@leonardoyanuarianto</p>
+                <p class="text-[11px] opacity-60">Available for work!</p>
+              </div>
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </div>
+          </div>
+
+          <!-- Chip mindset 01 (diatur JS section 11) -->
+          <div id="mindsetChip1"
+               class="hero-chip-glitch float-slow hidden md:flex absolute -left-12 top-16 items-center gap-3 rounded-xl bg-white/90 backdrop-blur border border-ink/10 px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,.08)] cursor-pointer select-none"
+               role="button" tabindex="0" aria-label="Ganti mindset">
+            <span class="w-8 h-8 rounded-lg bg-ink text-paper grid place-items-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.5 3a3.5 3.5 0 0 0-3.5 3.5A3.5 3.5 0 0 0 3 10a3.5 3.5 0 0 0 3 3.5A3.5 3.5 0 0 0 9.5 17H12V3H9.5Z"/>
+                <path d="M14.5 3A3.5 3.5 0 0 1 18 6.5a3.5 3.5 0 0 1 3 3.5 3.5 3.5 0 0 1-3 3.5 3.5 3.5 0 0 1-3.5 3.5H12V3h2.5Z"/>
+                <path d="M12 7h2"/><path d="M12 12h2"/><path d="M8 10h2"/>
+              </svg>
+            </span>
+            <span id="mindsetText1" class="font-mono text-[10px] tracking-widest">PROBLEM SOLVING</span>
+          </div>
+
+          <!-- Chip mindset 02 -->
+          <div id="mindsetChip2"
+               class="hero-chip-glitch float-slower hidden md:flex absolute -right-8 bottom-28 items-center gap-3 rounded-xl bg-white/90 backdrop-blur border border-ink/10 px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,.08)] cursor-pointer select-none"
+               role="button" tabindex="0" aria-label="Ganti mindset">
+            <span class="w-8 h-8 rounded-lg bg-ink text-paper grid place-items-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"/><path d="M10 22h4"/>
+                <path d="M15 14.5a7 7 0 1 0-6 0c.6.4 1 1.1 1 1.8V18h4v-1.7c0-.7.4-1.4 1-1.8Z"/>
+                <path d="M12 2v1"/><path d="m4.9 4.9.7.7"/><path d="M2 12h1"/>
+                <path d="m19.1 4.9-.7.7"/><path d="M21 12h-1"/>
+              </svg>
+            </span>
+            <span id="mindsetText2" class="font-mono text-[10px] tracking-widest">SYSTEM THINKING</span>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ============ ABOUT (kartu bertumpuk) ============ -->
+      <section id="about" class="stack-card about-section flex flex-col justify-center scroll-mt-24 rounded-3xl overflow-hidden px-6 md:px-16 py-28 md:py-40 text-white shadow-2xl">
+
+        <!-- Cahaya yang mengikuti kursor (JS section 10d) -->
+        <div id="aboutGlow" class="pointer-events-none absolute inset-0"
+             style="background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 35%), rgb(28, 28, 28), transparent 60%);"></div>
+
+        <div class="reveal relative mx-auto w-full max-w-6xl">
+
+          <p class="font-mono text-xs md:text-sm tracking-widest text-white/40 text-center mb-12">ABOUT ME</p>
+
+          <!-- Paragraf: kata di <b> = kata kunci (lebih terang) -->
+          <p id="aboutText" class="font-tech text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.15] text-center">
+            I'm an Information Systems student who turns <b>data</b> and ideas into <b>useful digital things</b> building <b>clean web interfaces</b>, exploring <b>database driven systems</b>, and growing every day in <b>software engineering</b>.
+          </p>
+
+          <p class="mt-14 text-center font-mono text-[11px] md:text-xs tracking-widest text-white/40">
+            SISTEM INFORMASI · UNIVERSITAS NUSANTARA PGRI KEDIRI · SEMESTER 3
+          </p>
+
+          <!-- Statistik -->
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 font-mono text-xs md:text-sm tracking-widest">
+            <span><span class="text-white/40">PROJECTS</span> 4+</span>
+            <span><span class="text-white/40">FOCUS</span> DATA &amp; WEB</span>
+            <span><span class="text-white/40">STATUS</span> LEARNING</span>
+          </div>
+
+          <!-- Ticker teknologi (isinya digandakan JS section 10c) -->
+          <div class="mt-14 overflow-hidden"
+               style="-webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);">
+            <div id="techTicker" class="flex w-max gap-10 pr-10 animate-marquee font-mono text-xs md:text-sm tracking-widest text-white/50">
+              <span class="flex items-center gap-10">PYTHON <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+              <span class="flex items-center gap-10">PANDAS <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+              <span class="flex items-center gap-10">NUMPY <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+              <span class="flex items-center gap-10">MATPLOTLIB <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+              <span class="flex items-center gap-10">COLAB <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+              <span class="flex items-center gap-10">HTML <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+              <span class="flex items-center gap-10">CSS <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+              <span class="flex items-center gap-10">JAVASCRIPT <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+              <span class="flex items-center gap-10">TAILWIND <i class="w-1 h-1 rounded-full bg-white/30"></i></span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ============ KARTU PUTIH: SKILLS sampai FOOTER ============ -->
+      <div class="relative z-10 bg-paper rounded-3xl overflow-hidden shadow-2xl">
+
+        <!-- ============ SKILLS: TECH STACK + SERTIFIKAT ============ -->
+        <section id="skills" class="scroll-mt-24 px-6 md:px-16 py-24 bg-night text-paper">
+
+          <!-- Tech stack (ikon kecil; style di CSS section 07) -->
+          <p class="reveal font-mono text-xs tracking-widest text-paper/50 mb-8">TECH STACK</p>
+
+          <div class="reveal flex flex-wrap gap-x-12 gap-y-8 mb-24">
+
+            <div>
+              <p class="font-mono text-[10px] tracking-widest text-paper/40 mb-3">WEB DEV</p>
+              <div class="flex gap-3">
+                <div class="tech-icon" role="img" aria-label="HTML"><img src="https://cdn.simpleicons.org/html5" alt=""><span class="tech-tip">HTML</span></div>
+                <div class="tech-icon" role="img" aria-label="CSS"><img src="https://cdn.simpleicons.org/css" alt=""><span class="tech-tip">CSS</span></div>
+                <div class="tech-icon" role="img" aria-label="JavaScript"><img src="https://cdn.simpleicons.org/javascript" alt=""><span class="tech-tip">JAVASCRIPT</span></div>
+                <div class="tech-icon" role="img" aria-label="Tailwind"><img src="https://cdn.simpleicons.org/tailwindcss" alt=""><span class="tech-tip">TAILWIND</span></div>
+              </div>
+            </div>
+
+            <div>
+              <p class="font-mono text-[10px] tracking-widest text-paper/40 mb-3">DATA PROCESSING</p>
+              <div class="flex gap-3">
+                <div class="tech-icon" role="img" aria-label="Python"><img src="https://cdn.simpleicons.org/python" alt=""><span class="tech-tip">PYTHON</span></div>
+                <div class="tech-icon" role="img" aria-label="Pandas"><img src="https://cdn.simpleicons.org/pandas/white" alt=""><span class="tech-tip">PANDAS</span></div>
+                <div class="tech-icon" role="img" aria-label="NumPy"><img src="https://cdn.simpleicons.org/numpy/white" alt=""><span class="tech-tip">NUMPY</span></div>
+                <div class="tech-icon" role="img" aria-label="Matplotlib"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" alt=""><span class="tech-tip">MATPLOTLIB</span></div>
+                <div class="tech-icon" role="img" aria-label="Colab"><img src="https://cdn.simpleicons.org/googlecolab" alt=""><span class="tech-tip">COLAB</span></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sertifikat (data & logika di JS section 06) -->
+          <div class="mb-6">
+            <p class="reveal font-mono text-xs tracking-widest text-paper/50 mb-4">ACHIEVEMENTS</p>
+            <h2 class="reveal font-serif text-5xl md:text-7xl">Certificates</h2>
+            <p class="reveal mt-3 text-sm font-light text-paper/60">Sertifikat dan pelatihan yang sudah saya selesaikan.</p>
+          </div>
+
+          <div id="certStage" tabindex="0" class="relative overflow-hidden select-none touch-pan-y py-10 outline-none" style="perspective: 1400px;">
+            <div id="certTrack" class="relative h-[220px] sm:h-[280px] md:h-[340px]"></div>
+          </div>
+
+          <div id="certInfo" class="mt-4 text-center max-w-2xl mx-auto">
+            <h3 id="certTitle" class="font-serif text-3xl md:text-5xl"></h3>
+            <p id="certMeta" class="mt-3 font-mono text-[11px] tracking-widest text-paper/50"></p>
+            <p id="certDesc" class="mt-4 text-sm font-light text-paper/70 leading-relaxed"></p>
+            <a id="certLink" href="#" target="_blank" rel="noopener"
+               class="inline-block mt-5 font-mono text-xs tracking-widest border-b border-paper/40 hover:border-paper transition">
+              LIHAT SERTIFIKAT →
+            </a>
+          </div>
+
+          <div class="mt-10 flex items-center justify-center gap-6">
+            <button id="certPrev" aria-label="Sebelumnya" class="w-11 h-11 grid place-items-center rounded-full border border-paper/25 hover:bg-paper hover:text-ink transition">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <span id="certCount" class="font-mono text-xs tracking-widest text-paper/60"></span>
+            <button id="certNext" aria-label="Berikutnya" class="w-11 h-11 grid place-items-center rounded-full border border-paper/25 hover:bg-paper hover:text-ink transition">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+
+        </section>
+
+
+        <!-- ============ PROJECTS ============ -->
+        <section id="projects" class="scroll-mt-24 px-6 md:px-16 py-24">
+
+          <div class="flex items-end justify-between gap-6 mb-12">
+            <div>
+              <p class="reveal font-mono text-xs tracking-widest text-ink/50 mb-4">SELECTED WORK</p>
+              <h2 class="reveal font-serif text-5xl md:text-7xl">Projects</h2>
+              <p class="reveal mt-3 text-sm font-light text-ink/60 max-w-md">Kumpulan project beserta dokumentasi singkat dari yang pernah saya bangun dan analisis.</p>
+            </div>
+
+            <a href="https://github.com/the1975" target="_blank" rel="noopener"
+               class="reveal hidden md:inline-block font-mono text-xs tracking-widest border border-ink rounded-full px-5 py-2 hover:bg-ink hover:text-paper transition">
+              VIEW ALL →
+            </a>
+          </div>
+
+          <!-- Screenshot diisi JS section 09 dari atribut data-shots -->
+          <div>
+
+            <!-- ===== PROJECT 01: teks kiri, media kanan ===== -->
+            <article class="group grid md:grid-cols-2 gap-8 md:gap-16 items-center py-12 md:py-20 border-t border-ink/15 last:border-b">
+              <div class="reveal">
+                <div class="flex items-center justify-between font-mono text-[11px] tracking-widest text-ink/50 mb-5">
+                  <span>01 / PROJECT</span><span>2026</span>
+                </div>
+                <h3 class="font-serif text-3xl md:text-5xl leading-tight">Freelance Skill Analytics</h3>
+                <div class="flex flex-wrap gap-2 mt-5">
+                  <span class="tag">PYTHON</span>
+                  <span class="tag">COLAB</span>
+                </div>
+                <p class="mt-6 text-sm md:text-base font-light text-ink/70 leading-relaxed max-w-md">
+                  Project ini bertujuan untuk memahami peluang dan tren skill IT di pasar freelance global, dengan melihat seberapa besar peluang sebuah skill berdasarkan tingkat permintaan dan nilai proyeknya. Data dari website Freelancer dikumpulkan melalui web scraping, kemudian diolah untuk menemukan skill yang paling banyak dicari, memiliki nilai proyek tinggi, dan berpotensi menjadi sweet spot antara demand dan value.
+                </p>
+                <div class="mt-7 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs tracking-widest">
+                  <a href="https://colab.research.google.com/drive/14TdyTDhSKAlRcBkwaUGnxMaxDU43MT_z#scrollTo=oLpN245XjbU0" target="_blank" rel="noopener" class="border-b border-ink/40 hover:border-ink transition">OPEN COLAB ↗</a>
+                  <a href="https://github.com/the1975/Data-Processing/blob/2e960a080a2ce43fa99c0c95393953f921428b32/Project_Data_Processing/Project_Data_Processing_Analisis_Pasar_Freelance.ipynb" target="_blank" rel="noopener" class="border-b border-ink/40 hover:border-ink transition">GITHUB ↗</a>
+                </div>
+              </div>
+
+              <div class="reveal order-first md:order-last">
+                <div class="shot-stack" data-label="freelance-skill-analytics" data-shots="img/A1.jpg, img/A2.jpg, img/A3.jpg"></div>
+              </div>
+            </article>
+
+
+            <!-- ===== PROJECT 02: media kiri, teks kanan ===== -->
+            <article class="group grid md:grid-cols-2 gap-8 md:gap-16 items-center py-12 md:py-20 border-t border-ink/15 last:border-b">
+              <div class="reveal">
+                <div class="flex items-center justify-between font-mono text-[11px] tracking-widest text-ink/50 mb-5">
+                  <span>02 / PROJECT</span><span>2026</span>
+                </div>
+                <h3 class="font-serif text-3xl md:text-5xl leading-tight">Personal Portfolio</h3>
+                <div class="flex flex-wrap gap-2 mt-5">
+                  <span class="tag">JAVASCRIPT</span>
+                  <span class="tag">TAILWIND</span>
+                </div>
+                <p class="mt-6 text-sm md:text-base font-light text-ink/70 leading-relaxed max-w-md">
+                  Website portfolio pribadi yang dibuat untuk memperkenalkan diri, menampilkan berbagai project, serta mendokumentasikan perjalanan belajar dan perkembangan saya di bidang Sistem Informasi dan teknologi. Portfolio ini juga menjadi wadah untuk menunjukkan kemampuan dan hasil pembelajaran melalui berbagai project yang telah dikerjakan.
+                </p>
+                <div class="mt-7 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs tracking-widest">
+                  <a href="https://the1975.github.io/Tugas-Web-Leonardo-2C/" target="_blank" rel="noopener" class="border-b border-ink/40 hover:border-ink transition">LIVE SITE ↗</a>
+                </div>
+              </div>
+
+              <div class="reveal order-first">
+                <div class="shot-stack" data-label="personal-portfolio" data-shots="img/P1.jpg, img/P2.jpg, img/P3.jpg"></div>
+              </div>
+            </article>
+
+
+            <!-- ===== PROJECT 03: teks kiri, media kanan ===== -->
+            <article class="group grid md:grid-cols-2 gap-8 md:gap-16 items-center py-12 md:py-20 border-t border-ink/15 last:border-b">
+              <div class="reveal">
+                <div class="flex items-center justify-between font-mono text-[11px] tracking-widest text-ink/50 mb-5">
+                  <span>03 / PROJECT</span><span>2026</span>
+                </div>
+                <h3 class="font-serif text-3xl md:text-5xl leading-tight">iPhone Price Scraper</h3>
+                <div class="flex flex-wrap gap-2 mt-5">
+                  <span class="tag">SCRAPING</span>
+                  <span class="tag">API</span>
+                </div>
+                <p class="mt-6 text-sm md:text-base font-light text-ink/70 leading-relaxed max-w-md">
+                  Project ini bertujuan untuk memahami perbedaan dan pola harga produk iPhone di pasar online, dengan melihat seberapa besar variasi harga antar model dan varian. Data harga dari berbagai listing Google Shopping dikumpulkan melalui web scraping, kemudian dibersihkan dan diolah untuk menghasilkan perbandingan harga yang lebih terstruktur serta menemukan pola harga di setiap model iPhone.
+                </p>
+                <div class="mt-7 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs tracking-widest">
+                  <a href="https://colab.research.google.com/drive/1DL0Ov7engivoRUmWcvVl5spf7mZmnSQd" target="_blank" rel="noopener" class="border-b border-ink/40 hover:border-ink transition">OPEN COLAB ↗</a>
+                  <a href="https://github.com/the1975/Data-Processing/blob/2e960a080a2ce43fa99c0c95393953f921428b32/Project_Data_Processing/scrapping_harga.ipynb" target="_blank" rel="noopener" class="border-b border-ink/40 hover:border-ink transition">GITHUB ↗</a>
+                </div>
+              </div>
+
+              <div class="reveal order-first md:order-last">
+                <div class="shot-stack" data-label="iphone-price-scraper" data-shots="img/S1.jpg, img/S2.jpg, img/S3.jpg"></div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+
+        <!-- ============ GITHUB CONTRIBUTIONS (JS section 07) ============ -->
+        <section id="github" class="scroll-mt-24 px-6 md:px-16 pb-24">
+          <div class="border-t border-ink/20 pt-16">
+
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-10">
+
+              <div>
+                <p class="reveal font-mono text-xs tracking-widest text-ink/50 mb-4">CODING ACTIVITY</p>
+                <h2 class="reveal font-serif text-4xl md:text-6xl leading-tight">GitHub Contributions</h2>
+              </div>
+
+              <!-- Statistik -->
+              <div class="reveal flex flex-wrap items-end gap-x-12 gap-y-6">
+                <div>
+                  <p class="font-mono text-[10px] tracking-widest text-ink/50">LAST 365 DAYS</p>
+                  <p id="ghTotal" class="font-serif text-5xl md:text-6xl leading-none mt-2">–</p>
+                </div>
+                <div>
+                  <p class="font-mono text-[10px] tracking-widest text-ink/50">LONGEST STREAK</p>
+                  <p id="ghStreak" class="font-serif text-5xl md:text-6xl leading-none mt-2">–</p>
+                </div>
+                <div>
+                  <p class="font-mono text-[10px] tracking-widest text-ink/50">ACTIVE DAYS</p>
+                  <p id="ghActive" class="font-serif text-5xl md:text-6xl leading-none mt-2">–</p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Kartu kalender -->
+            <div class="reveal min-w-0 rounded-2xl bg-ink text-paper p-5 md:p-8 shadow-xl">
+
+              <div id="ghScroll" class="overflow-x-auto pb-2">
+                <div id="ghCalendar" class="w-max">
+                  <p class="font-mono text-xs tracking-widest text-paper/50 py-16 px-4">MEMUAT DATA GITHUB…</p>
+                </div>
+              </div>
+
+              <div class="mt-5 flex items-center justify-between gap-4 font-mono text-[10px] tracking-widest text-paper/50">
+                <a href="https://github.com/the1975" target="_blank" rel="noopener" class="hover:text-paper transition">@the1975 · VIEW PROFILE →</a>
+                <span class="flex items-center gap-1.5">
+                  LESS
+                  <i class="gh-cell" data-level="0"></i>
+                  <i class="gh-cell" data-level="1"></i>
+                  <i class="gh-cell" data-level="2"></i>
+                  <i class="gh-cell" data-level="3"></i>
+                  <i class="gh-cell" data-level="4"></i>
+                  MORE
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============ GALLERY (JS section 02) ============ -->
+        <section id="gallery" class="scroll-mt-24 py-24 overflow-hidden">
+
+          <div class="px-6 md:px-16 mb-10">
+            <p class="reveal font-mono text-xs tracking-widest text-ink/50 mb-4">DOCUMENTATION</p>
+            <h2 class="reveal font-serif text-5xl md:text-7xl">Moments</h2>
+          </div>
+
+          <div id="marquee" class="flex w-max gap-4 pr-4 animate-marquee hover:[animation-play-state:paused]">
+            <img src="img/kimi.jpeg"  alt="Dokumentasi 1" class="gallery-img" loading="lazy">
+            <img src="img/kimi2.jpeg" alt="Dokumentasi 2" class="gallery-img" loading="lazy">
+            <img src="img/kimi3.jpeg" alt="Dokumentasi 3" class="gallery-img" loading="lazy">
+            <img src="img/kimi4.jpeg" alt="Dokumentasi 4" class="gallery-img" loading="lazy">
+          </div>
+
+        </section>
+
+
+        <!-- ============ CONTACT (JS section 08) ============ -->
+        <section id="contact" class="scroll-mt-24 px-6 md:px-16 py-28 bg-night text-paper text-center">
+
+          <p class="reveal font-mono text-xs tracking-widest text-paper/50 mb-6">GET IN TOUCH</p>
+
+          <h2 id="contactTitle" class="bounce-title reveal font-serif font-light text-4xl sm:text-5xl md:text-7xl leading-none">
+            Let's work <em class="font-semibold">together</em>
+          </h2>
+
+          <!-- Ikon: 2 pertama membuka popup, 3 berikutnya link sosmed -->
+          <div class="reveal mt-14 flex flex-wrap items-center justify-center gap-3">
+
+            <!-- Email (buka popup) -->
+            <button type="button" data-open-modal="email" aria-label="Kirim email" class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <span class="contact-tip">EMAIL</span>
+            </button>
+
+            <!-- WhatsApp (buka popup) -->
+            <button type="button" data-open-modal="whatsapp" aria-label="Chat WhatsApp" class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+              </svg>
+              <span class="contact-tip">WHATSAPP</span>
+            </button>
+
+            <span class="w-px h-8 bg-paper/20 mx-2" aria-hidden="true"></span>
+
+            <!-- GitHub -->
+            <a href="https://github.com/the1975" target="_blank" rel="noopener" aria-label="GitHub" class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                <path d="M9 18c-4.51 2-5-2-7-2"/>
+              </svg>
+              <span class="contact-tip">GITHUB</span>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/leonardoyanuarianto" target="_blank" rel="noopener" aria-label="LinkedIn" class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              <span class="contact-tip">LINKEDIN</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/leonardoyanuarianto" target="_blank" rel="noopener" aria-label="Instagram" class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+              <span class="contact-tip">INSTAGRAM</span>
+            </a>
+
+          </div>
+
+          <!-- Popup (dipakai untuk Email dan WhatsApp) -->
+          <dialog id="contactModal" class="contact-modal" aria-labelledby="modalTitle">
+            <div class="relative p-6 md:p-8 text-left">
+
+              <button type="button" id="modalClose" aria-label="Tutup"
+                      class="absolute top-4 right-4 w-9 h-9 grid place-items-center rounded-full border border-paper/20 hover:bg-paper hover:text-night transition">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18M6 6l12 12"/>
+                </svg>
+              </button>
+
+              <p id="modalLabel" class="font-mono text-[10px] tracking-widest text-paper/50 mb-3">EMAIL</p>
+              <h3 id="modalTitle" class="font-serif text-3xl md:text-4xl pr-10">Send an Email directly.</h3>
+
+              <form id="contactForm" novalidate class="mt-6 space-y-5">
+
+                <label class="block">
+                  <span class="font-mono text-[10px] tracking-widest text-paper/50">NAME</span>
+                  <input type="text" name="name" required placeholder="John Doe" class="form-field mt-2">
+                </label>
+
+                <label id="emailField" class="block">
+                  <span class="font-mono text-[10px] tracking-widest text-paper/50">EMAIL</span>
+                  <input type="email" name="email" required placeholder="johndoe@example.com" class="form-field mt-2">
+                </label>
+
+                <label class="block">
+                  <span class="font-mono text-[10px] tracking-widest text-paper/50">MESSAGE</span>
+                  <textarea name="message" rows="5" required placeholder="Your message here..." class="form-field mt-2" style="resize: vertical;"></textarea>
+                </label>
+
+                <!-- Jebakan spam, jangan dihapus -->
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display: none;">
+
+                <button id="sendBtn" type="submit"
+                        class="w-full rounded-xl bg-paper text-night py-3 font-mono text-xs tracking-widest hover:opacity-90 transition disabled:opacity-50">
+                  SEND MESSAGE
+                </button>
+
+                <p id="formStatus" role="status" class="font-mono text-xs tracking-widest text-paper/60 min-h-[1rem]"></p>
+
+              </form>
+            </div>
+          </dialog>
+
+        </section>
+
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="px-6 md:px-16 py-6 bg-night text-paper/40 border-t border-paper/10 flex justify-between font-mono text-[10px] tracking-widest">
+          <span>© 2026 LEONARDO YANUARIANTO</span>
+          <a href="#" class="hover:text-paper transition">BACK TO TOP ↑</a>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+
+
+  <!-- ================= JAVASCRIPT (daftar isi ada di dalam file) ================= -->
+  <script src="js/script.js"></script>
+
+</body>
+</html>
