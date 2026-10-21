@@ -42,23 +42,6 @@
 
 
 /* ==========================================================
-   02. GALERI MARQUEE
-   Foto digandakan supaya animasi geser terlihat tanpa putus.
-   ========================================================== */
-(() => {
-  const marquee = document.getElementById('marquee');
-  if (!marquee) return;
-
-  [...marquee.children].forEach((img) => {
-    const clone = img.cloneNode(true);
-    clone.alt = '';
-    clone.setAttribute('aria-hidden', 'true');
-    marquee.appendChild(clone);
-  });
-})();
-
-
-/* ==========================================================
    03. TEXT TYPING DI HERO
    Ganti isi array WORDS untuk mengubah teks yang diketik.
    ========================================================== */
