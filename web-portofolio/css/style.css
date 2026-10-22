@@ -1794,3 +1794,74 @@ dialog.contact-modal[open]::backdrop { animation: modal-fade .3s ease both; }
     gap: 24px !important;
   }
 }
+
+/* ===== PROJECTS — LARGER PROJECT IMAGES ===== */
+section[id*="project" i] img,
+section[class*="project" i] img {
+  width: 100%;
+  height: clamp(240px, 28vw, 360px);
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  section[id*="project" i] img,
+  section[class*="project" i] img {
+    height: 260px;
+  }
+}
+
+/* ===== PROJECTS — CLEARER DESCRIPTION ===== */
+section[id*="project" i] p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  section[id*="project" i] p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+}
+
+/* ===== PROJECTS — VISIBILITY BOOST ===== */
+
+/* Foto project dibuat lebih dominan */
+#projects img,
+.projects img,
+.project img,
+.project-card img,
+[class*="project"] img {
+  width: 100% !important;
+  height: 380px !important;
+  object-fit: cover !important;
+}
+
+/* Deskripsi project dibuat lebih jelas */
+#projects p,
+.projects p,
+.project p,
+.project-card p,
+[class*="project"] p {
+  font-size: 1.15rem !important;
+  line-height: 1.75 !important;
+}
+
+@media (max-width: 768px) {
+  #projects img,
+  .projects img,
+  .project img,
+  .project-card img,
+  [class*="project"] img {
+    height: 280px !important;
+  }
+
+  #projects p,
+  .projects p,
+  .project p,
+  .project-card p,
+  [class*="project"] p {
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+  }
+}
+
