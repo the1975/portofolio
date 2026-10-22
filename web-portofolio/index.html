@@ -264,21 +264,21 @@
       </section>
 
 
-      <!-- ============ KARTU PUTIH: GALLERY sampai FOOTER ============ -->
+      <!-- ============ KARTU PUTIH: MOMENTS sampai FOOTER ============ -->
       <div class="relative z-10 bg-paper rounded-3xl overflow-hidden shadow-2xl">
 
-        <!-- ============ GALLERY / VISUAL DOCUMENTATION ============ -->
+        <!-- ============ MOMENTS / VISUAL DOCUMENTATION ============ -->
         <section id="gallery" class="scroll-mt-24 moments-section">
 
           <div class="moments-header px-6 md:px-16">
             <div>
               <p class="reveal font-mono text-xs tracking-widest text-ink/50 mb-4">DOCUMENTATION</p>
-              <h2 class="reveal font-serif text-5xl md:text-7xl">Gallery</h2>
+              <h2 class="reveal font-serif text-5xl md:text-7xl">Moments</h2>
             </div>
             <p class="reveal moments-intro">A visual collection of things I've been building, learning, and experiencing.</p>
           </div>
 
-          <div class="moments-carousel">
+          <div class="moments-carousel" tabindex="0" role="region" aria-label="Galeri moments">
             <div class="moments-track">
 
           <!-- MOMENT 01 -->
@@ -368,9 +368,14 @@
             </div>
           </div>
 
+          <!-- Kontrol carousel: panah + angka (logika di JS section 12) -->
           <div class="moments-footer px-6 md:px-16">
-            <span>SWIPE TO EXPLORE</span>
-            <span>01 — 04 →</span>
+            <span>SWIPE / DRAG TO EXPLORE</span>
+            <div class="moments-nav">
+              <span class="moments-count">01 — 04</span>
+              <button type="button" class="shot-btn moments-prev" aria-label="Sebelumnya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <button type="button" class="shot-btn moments-next" aria-label="Berikutnya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
           </div>
 
         </section>
