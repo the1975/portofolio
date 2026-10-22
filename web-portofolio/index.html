@@ -66,9 +66,9 @@
       <!-- Menu (hanya tampil di desktop) -->
       <nav class="hidden md:flex gap-8 font-mono text-xs tracking-widest">
         <a href="#about" class="hover:opacity-50 transition">ABOUT</a>
+        <a href="#gallery" class="hover:opacity-50 transition">GALLERY</a>
         <a href="#skills" class="hover:opacity-50 transition">SKILLS</a>
         <a href="#projects" class="hover:opacity-50 transition">PROJECTS</a>
-        <a href="#gallery" class="hover:opacity-50 transition">GALLERY</a>
       </nav>
 
       <!-- Tombol Hire Me -->
@@ -264,8 +264,117 @@
       </section>
 
 
-      <!-- ============ KARTU PUTIH: SKILLS sampai FOOTER ============ -->
+      <!-- ============ KARTU PUTIH: GALLERY sampai FOOTER ============ -->
       <div class="relative z-10 bg-paper rounded-3xl overflow-hidden shadow-2xl">
+
+        <!-- ============ GALLERY / VISUAL DOCUMENTATION ============ -->
+        <section id="gallery" class="scroll-mt-24 moments-section">
+
+          <div class="moments-header px-6 md:px-16">
+            <div>
+              <p class="reveal font-mono text-xs tracking-widest text-ink/50 mb-4">DOCUMENTATION</p>
+              <h2 class="reveal font-serif text-5xl md:text-7xl">Gallery</h2>
+            </div>
+            <p class="reveal moments-intro">A visual collection of things I've been building, learning, and experiencing.</p>
+          </div>
+
+          <div class="moments-carousel">
+            <div class="moments-track">
+
+          <!-- MOMENT 01 -->
+          <article class="moment-card">
+            <div class="moment-top"><span>01 / MOMENT</span><span>2026</span></div>
+            <div class="moment-body">
+              <div class="moment-copy">
+                <p class="moment-kicker">BUILDING</p>
+                <h3 class="moment-title font-serif">Karang Taruna Putra Budha</h3>
+                <p class="moment-description">Karang Taruna merupakan salah satu organisasi desa yang saya ikuti untuk mendapatkan pengalaman di luar lingkungan perkuliahan. Selama bergabung, saya belajar banyak hal mengenai kerja sama dalam tim, komunikasi, pembagian tugas, serta bagaimana merencanakan dan menjalankan berbagai kegiatan atau event di lingkungan masyarakat. Pengalaman ini membantu saya menjadi lebih terbiasa bekerja bersama orang lain, menyampaikan pendapat, menyelesaikan masalah, dan bertanggung jawab terhadap tugas yang diberikan.</p>
+                <div class="moment-meta">
+              <span>DEVELOPMENT</span>
+              <span>UI / UX</span>
+                </div>
+              </div>
+              <!-- Frame + tumpukan foto sama seperti Projects (JS section 09).
+                   Tambah foto: tulis di data-shots, pisahkan dengan koma. -->
+              <div class="moment-media">
+                <div class="shot-stack" data-label="karang-taruna-putra-budha" data-shots="img/kimi.jpeg, img/kimi1.jpeg"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- MOMENT 02 -->
+          <article class="moment-card">
+            <div class="moment-top"><span>02 / MOMENT</span><span>2026</span></div>
+            <div class="moment-body">
+              <div class="moment-copy">
+                <p class="moment-kicker">LEARNING</p>
+                <h3 class="moment-title font-serif">Data Processing</h3>
+                <p class="moment-description">Exploring how structured data can be cleaned, processed, and transformed into information that is easier to understand and analyze.</p>
+                <div class="moment-meta">
+              <span>DATA</span>
+              <span>LEARNING</span>
+                </div>
+              </div>
+              <!-- Frame + tumpukan foto sama seperti Projects (JS section 09).
+                   Tambah foto: tulis di data-shots, pisahkan dengan koma. -->
+              <div class="moment-media">
+                <div class="shot-stack" data-label="data-processing" data-shots="img/kimi2.jpeg"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- MOMENT 03 -->
+          <article class="moment-card">
+            <div class="moment-top"><span>03 / MOMENT</span><span>2026</span></div>
+            <div class="moment-body">
+              <div class="moment-copy">
+                <p class="moment-kicker">CAMPUS</p>
+                <h3 class="moment-title font-serif">A Day at Campus</h3>
+                <p class="moment-description">Small moments and experiences from everyday university life, documenting the environment behind the work and learning.</p>
+                <div class="moment-meta">
+              <span>CAMPUS LIFE</span>
+              <span>PERSONAL</span>
+                </div>
+              </div>
+              <!-- Frame + tumpukan foto sama seperti Projects (JS section 09).
+                   Tambah foto: tulis di data-shots, pisahkan dengan koma. -->
+              <div class="moment-media">
+                <div class="shot-stack" data-label="a-day-at-campus" data-shots="img/kimi3.jpeg"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- MOMENT 04 -->
+          <article class="moment-card">
+            <div class="moment-top"><span>04 / MOMENT</span><span>2026</span></div>
+            <div class="moment-body">
+              <div class="moment-copy">
+                <p class="moment-kicker">REFLECTION</p>
+                <h3 class="moment-title font-serif">A Quieter Side</h3>
+                <p class="moment-description">A quieter moment away from the screen, capturing the small pauses that become part of the journey.</p>
+                <div class="moment-meta">
+              <span>PERSONAL</span>
+              <span>JOURNAL</span>
+                </div>
+              </div>
+              <!-- Frame + tumpukan foto sama seperti Projects (JS section 09).
+                   Tambah foto: tulis di data-shots, pisahkan dengan koma. -->
+              <div class="moment-media">
+                <div class="shot-stack" data-label="a-quieter-side" data-shots="img/kimi4.jpeg"></div>
+              </div>
+            </div>
+          </article>
+
+            </div>
+          </div>
+
+          <div class="moments-footer px-6 md:px-16">
+            <span>SWIPE TO EXPLORE</span>
+            <span>01 — 04 →</span>
+          </div>
+
+        </section>
+
 
         <!-- ============ SKILLS: TECH STACK + SERTIFIKAT ============ -->
         <section id="skills" class="scroll-mt-24 px-6 md:px-16 py-24 bg-night text-paper">
@@ -485,238 +594,6 @@
             </div>
           </div>
         </section>
-
-
-        <!-- ============ MOMENTS / VISUAL DOCUMENTATION ============ -->
-        <section id="gallery" class="scroll-mt-24 moments-section">
-        
-          <!-- Header -->
-          <div class="moments-header px-6 md:px-16">
-        
-            <div>
-              <p class="reveal font-mono text-xs tracking-widest text-ink/50 mb-4">
-                DOCUMENTATION
-              </p>
-        
-              <h2 class="reveal font-serif moments-heading">
-                Moments
-              </h2>
-            </div>
-        
-            <p class="reveal moments-intro">
-              A visual collection of things I've been
-              building, learning, and experiencing.
-            </p>
-        
-          </div>
-        
-        
-          <!-- Horizontal carousel -->
-          <div class="moments-carousel">
-        
-            <div class="moments-track">
-        
-        
-              <!-- MOMENT 01 -->
-              <article class="moment-card">
-        
-                <div class="moment-top">
-                  <span>01 / MOMENT</span>
-                  <span>2026</span>
-                </div>
-        
-                <div class="moment-body">
-        
-                  <div class="moment-copy">
-        
-                    <p class="moment-kicker">
-                      BUILDING
-                    </p>
-        
-                    <h4 class="moment-title">
-                      Karang Taruna Putra Budha
-                    </h4>
-        
-                    <p class="moment-description">
-                      Karang Taruna merupakan salah satu organisasi desa yang saya ikuti untuk mendapatkan pengalaman di luar lingkungan perkuliahan. Selama bergabung, saya belajar banyak hal mengenai kerja sama dalam tim, komunikasi, pembagian tugas, serta bagaimana merencanakan dan menjalankan berbagai kegiatan atau event di lingkungan masyarakat. Pengalaman ini membantu saya menjadi lebih terbiasa bekerja bersama orang lain, menyampaikan pendapat, menyelesaikan masalah, dan bertanggung jawab terhadap tugas yang diberikan.
-                    </p>
-        
-                    <div class="moment-meta">
-                      <span>DEVELOPMENT</span>
-                      <span>UI / UX</span>
-                    </div>
-        
-                  </div>
-        
-                  <figure class="moment-image">
-                    <img
-                      src="img/kimi.jpeg"
-                      alt="Monster Café POS documentation"
-                      loading="lazy"
-                    >
-                  </figure>
-        
-                </div>
-        
-              </article>
-        
-        
-              <!-- MOMENT 02 -->
-              <article class="moment-card">
-        
-                <div class="moment-top">
-                  <span>02 / MOMENT</span>
-                  <span>2026</span>
-                </div>
-        
-                <div class="moment-body">
-        
-                  <div class="moment-copy">
-        
-                    <p class="moment-kicker">
-                      LEARNING
-                    </p>
-        
-                    <h3 class="moment-title">
-                      Data Processing
-                    </h3>
-        
-                    <p class="moment-description">
-                      Exploring how structured data can be cleaned,
-                      processed, and transformed into information
-                      that is easier to understand and analyze.
-                    </p>
-        
-                    <div class="moment-meta">
-                      <span>DATA</span>
-                      <span>LEARNING</span>
-                    </div>
-        
-                  </div>
-        
-                  <figure class="moment-image">
-                    <img
-                      src="img/kimi2.jpeg"
-                      alt="Data processing documentation"
-                      loading="lazy"
-                    >
-                  </figure>
-        
-                </div>
-        
-              </article>
-        
-        
-              <!-- MOMENT 03 -->
-              <article class="moment-card">
-        
-                <div class="moment-top">
-                  <span>03 / MOMENT</span>
-                  <span>2026</span>
-                </div>
-        
-                <div class="moment-body">
-        
-                  <div class="moment-copy">
-        
-                    <p class="moment-kicker">
-                      CAMPUS
-                    </p>
-        
-                    <h3 class="moment-title">
-                      A Day at Campus
-                    </h3>
-        
-                    <p class="moment-description">
-                      Small moments and experiences from everyday
-                      university life, documenting the environment
-                      behind the work and learning.
-                    </p>
-        
-                    <div class="moment-meta">
-                      <span>CAMPUS LIFE</span>
-                      <span>PERSONAL</span>
-                    </div>
-        
-                  </div>
-        
-                  <figure class="moment-image">
-                    <img
-                      src="img/kimi3.jpeg"
-                      alt="Campus life documentation"
-                      loading="lazy"
-                    >
-                  </figure>
-        
-                </div>
-        
-              </article>
-        
-        
-              <!-- MOMENT 04 -->
-              <article class="moment-card">
-        
-                <div class="moment-top">
-                  <span>04 / MOMENT</span>
-                  <span>2026</span>
-                </div>
-        
-                <div class="moment-body">
-        
-                  <div class="moment-copy">
-        
-                    <p class="moment-kicker">
-                      REFLECTION
-                    </p>
-        
-                    <h3 class="moment-title">
-                      A Quieter Side
-                    </h3>
-        
-                    <p class="moment-description">
-                      A quieter moment away from the screen,
-                      capturing the small pauses that become
-                      part of the journey.
-                    </p>
-        
-                    <div class="moment-meta">
-                      <span>PERSONAL</span>
-                      <span>JOURNAL</span>
-                    </div>
-        
-                  </div>
-        
-                  <figure class="moment-image">
-                    <img
-                      src="img/kimi4.jpeg"
-                      alt="Personal documentation"
-                      loading="lazy"
-                    >
-                  </figure>
-        
-                </div>
-        
-              </article>
-        
-        
-            </div>
-        
-          </div>
-        
-        
-          <div class="moments-footer px-6 md:px-16">
-        
-            <span>
-              SWIPE TO EXPLORE
-            </span>
-        
-            <span>
-              01 — 04 →
-            </span>
-        
-          </div>
-        
-</section>
 
 
         <!-- ============ CONTACT (JS section 08) ============ -->
