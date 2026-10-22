@@ -538,7 +538,6 @@
 
   .moments-header {
     display: block;
-
     margin-bottom: 2rem;
   }
 
@@ -548,7 +547,6 @@
 
   .moments-intro {
     max-width: 19rem;
-
     margin-top: 1rem;
   }
 
@@ -556,27 +554,41 @@
   /* Carousel */
 
   .moments-carousel {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   .moments-track {
-    gap: .9rem;
+    gap: 1rem;
   }
 
+
+  /* Dark editorial card — same tone as footer */
+
   .moment-card {
-    flex: 0 0 88vw;
+    flex: 0 0 calc(100vw - 2.5rem);
 
-    padding: .75rem;
+    padding: .9rem;
 
-    border-radius: 1rem;
+    background: #0e1116;
+    color: #e8e8e4;
+
+    border: 1px solid rgba(232, 232, 228, .12);
+    border-radius: 1.15rem;
+
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .12);
+  }
+
+  .moment-card .moment-top {
+    color: rgba(232, 232, 228, .45);
+    border-color: rgba(232, 232, 228, .12);
   }
 
 
   /* Card header */
 
   .moment-top {
-    padding-bottom: .7rem;
+    padding: 0 .2rem .75rem;
   }
 
 
@@ -586,59 +598,105 @@
     display: flex;
     flex-direction: column;
 
-    gap: 1.25rem;
+    gap: 1.35rem;
 
     min-height: 0;
 
-    padding-top: .75rem;
+    padding-top: .85rem;
   }
+
+
+  /* Bigger project image */
 
   .moment-image {
     order: -1;
 
     width: 100%;
-    height: 54vw;
+    height: 68vw;
 
-    min-height: 220px;
-    max-height: 340px;
+    min-height: 280px;
+    max-height: 420px;
 
-    border-radius: .7rem;
+    border-radius: .8rem;
+
+    background: #1c1f24;
+  }
+
+  .moment-image img {
+    filter: grayscale(.35);
   }
 
 
   /* Text */
 
   .moment-copy {
-    padding: .25rem .1rem .5rem;
+    padding: .35rem .15rem .55rem;
   }
 
   .moment-kicker {
-    margin-bottom: .75rem;
+    margin-bottom: .8rem;
+    color: rgba(232, 232, 228, .45);
   }
 
   .moment-title {
-    font-size: clamp(2.2rem, 11vw, 3.4rem);
+    font-size: clamp(2.35rem, 11.5vw, 3.6rem);
+    color: #e8e8e4;
   }
 
   .moment-description {
+    max-width: none;
+
     margin-top: 1rem;
 
-    font-size: .85rem;
-    line-height: 1.7;
+    font-size: .88rem;
+    line-height: 1.75;
+
+    color: rgba(232, 232, 228, .62);
   }
 
   .moment-meta {
-    margin-top: 1.25rem;
+    margin-top: 1.3rem;
+
+    color: rgba(232, 232, 228, .45);
+    border-color: rgba(232, 232, 228, .12);
   }
 
 
   /* Footer */
 
   .moments-footer {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
 
-    margin-top: .75rem;
+    margin-top: .9rem;
+  }
+
+}
+
+
+/* Slightly larger project imagery on tablet/desktop */
+
+@media (min-width: 768px) {
+
+  .moment-body {
+    grid-template-columns: .82fr 1.18fr;
+    gap: 1.75rem;
+  }
+
+  .moment-image {
+    height: 460px;
+  }
+
+}
+
+@media (min-width: 1025px) {
+
+  .moment-card {
+    flex-basis: min(82vw, 1040px);
+  }
+
+  .moment-image {
+    height: 480px;
   }
 
 }
@@ -1104,3 +1162,635 @@ dialog.contact-modal[open]::backdrop { animation: modal-fade .3s ease both; }
 }
 .form-field::placeholder { color: rgba(232, 232, 228, .3); }
 .form-field:focus { border-color: rgba(232, 232, 228, .7); }
+
+/* ===== MOMENTS MOBILE FINAL ===== */
+
+@media (max-width: 767px) {
+
+  .moments-carousel {
+    width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  .moments-track {
+    gap: 16px !important;
+  }
+
+  .moment-card {
+    flex: 0 0 calc(100vw - 48px) !important;
+    width: calc(100vw - 48px) !important;
+    max-width: calc(100vw - 48px) !important;
+
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+
+    background: #0e1116 !important;
+    color: #f1f1ed !important;
+
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 20px !important;
+  }
+
+  .moment-image {
+    width: 100% !important;
+    height: 68vw !important;
+    min-height: 280px !important;
+    max-height: 420px !important;
+
+    overflow: hidden !important;
+    border-radius: 14px !important;
+  }
+
+  .moment-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .moment-title {
+    max-width: 100% !important;
+    color: #f1f1ed !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .moment-description {
+    max-width: 100% !important;
+    color: rgba(241,241,237,.65) !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .moment-meta {
+    border-color: rgba(255,255,255,.12) !important;
+    color: rgba(241,241,237,.45) !important;
+  }
+
+}
+
+
+/* ===== DESKTOP / TABLET TETAP ORIGINAL ===== */
+
+@media (min-width: 768px) {
+
+  .moment-card {
+    background: revert !important;
+    color: revert !important;
+  }
+
+}
+
+
+/* ==========================================================
+   MOMENTS — FINAL SPACING & IMAGE SIZE
+   ========================================================== */
+
+/* Tablet + Laptop/Desktop:
+   Perbesar area foto tanpa mengubah warna/layout utama */
+@media (min-width: 768px) {
+
+  .moment-body {
+    min-height: 500px;
+  }
+
+  .moment-image {
+    height: 500px;
+  }
+
+}
+
+
+/* Mobile:
+   Center card dengan jarak 24px dari kedua sisi */
+@media (max-width: 767px) {
+
+  .moments-carousel {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .moment-card {
+    flex: 0 0 calc(100vw - 48px);
+  }
+
+}
+
+/* ==========================================================
+   MOMENTS — PROJECT IMAGE SIZE
+   ========================================================== */
+
+@media (min-width: 768px) {
+  .moment-card .moment-image {
+    height: 500px !important;
+    min-height: 500px !important;
+  }
+
+  .moment-card .moment-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .moment-card .moment-image {
+    width: 100% !important;
+  }
+
+  .moment-card .moment-image img {
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+}
+
+/* =========================================================
+   MOMENTS — CONSISTENT DARK CARD
+   ========================================================= */
+
+.moment-card {
+  background: #0e1116 !important;
+  color: #f1f1ed !important;
+  margin-left: 24px !important;
+  margin-right: 24px !important;
+  padding: 24px !important;
+  box-sizing: border-box !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.moment-card .moment-image {
+  width: 100% !important;
+  margin: 0 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.moment-card .moment-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.moment-card .moment-title {
+  color: #f1f1ed !important;
+}
+
+.moment-card .moment-description {
+  color: rgba(241, 241, 237, 0.65) !important;
+}
+
+.moment-card .moment-meta {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(241, 241, 237, 0.45) !important;
+}
+
+@media (min-width: 768px) {
+  .moment-card {
+    margin-left: 24px !important;
+    margin-right: 24px !important;
+    padding: 24px !important;
+  }
+
+  .moment-card .moment-image {
+    height: 500px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .moment-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+
+/* =========================================================
+   MOMENTS — DESKTOP TEXT + SPACING FIX
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  /* Card tetap hitam, tetapi jangan pakai margin untuk positioning */
+  .moment-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    background: #0e1116 !important;
+    color: #f1f1ed !important;
+  }
+
+  /* Beri ruang dari batas background abu-abu */
+  .moments-carousel {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Judul utama */
+  .moment-card .moment-title {
+    color: #ffffff !important;
+  }
+
+  /* Deskripsi */
+  .moment-card .moment-description {
+    color: rgba(241, 241, 237, 0.72) !important;
+  }
+
+  /* Metadata */
+  .moment-card .moment-meta {
+    color: rgba(241, 241, 237, 0.55) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* Kalau ada teks biasa di dalam body card */
+  .moment-card .moment-body {
+    color: #f1f1ed !important;
+  }
+
+}
+
+
+/* =========================================================
+   MOMENTS — DESKTOP CARD POSITION FIX
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  .moments-carousel {
+    width: calc(100% - 48px) !important;
+    margin-left: 24px !important;
+    margin-right: 24px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: auto !important;
+  }
+
+  .moments-track {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .moment-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+}
+
+
+/* =========================================================
+   MOMENTS — MOBILE FINAL
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .moments-carousel {
+    width: calc(100% - 24px) !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .moments-track {
+    width: 100% !important;
+    gap: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .moment-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    padding: 16px !important;
+    box-sizing: border-box !important;
+
+    background: #0e1116 !important;
+    color: #f1f1ed !important;
+
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+
+  .moment-card .moment-image {
+    width: 100% !important;
+    height: 68vw !important;
+    min-height: 280px !important;
+    max-height: 420px !important;
+
+    margin: 0 !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+  }
+
+  .moment-card .moment-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .moment-card .moment-title {
+    color: #ffffff !important;
+  }
+
+  .moment-card .moment-description {
+    color: rgba(241,241,237,.72) !important;
+  }
+
+  .moment-card .moment-meta {
+    color: rgba(241,241,237,.55) !important;
+    border-color: rgba(255,255,255,.15) !important;
+  }
+
+}
+
+/* MOMENTS — RESTORE DESKTOP HEADER */
+@media (min-width: 768px) {
+
+  .moment-card .moment-top {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 24px !important;
+    margin: 0 0 16px 0 !important;
+    padding: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 20 !important;
+  }
+
+  .moment-card .moment-top * {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .moment-card .moment-image {
+    margin-top: 0 !important;
+  }
+
+}
+
+
+/* MOMENTS — DESKTOP HEADER COLORS MATCH MOBILE */
+@media (min-width: 768px) {
+
+  .moment-card .moment-top,
+  .moment-card .moment-top span,
+  .moment-card .moment-top p,
+  .moment-card .moment-top div {
+    color: #f1f1ed !important;
+  }
+
+  .moment-card .moment-top .moment-number,
+  .moment-card .moment-top .moment-date {
+    color: rgba(241,241,237,.65) !important;
+  }
+
+  .moment-card .moment-top svg {
+    color: #f1f1ed !important;
+    fill: currentColor !important;
+  }
+
+}
+
+
+/* MOMENTS — DESKTOP HEADER DIVIDER */
+@media (min-width: 768px) {
+  .moment-card .moment-top {
+    padding-bottom: 14px !important;
+    margin-bottom: 16px !important;
+    border-bottom: 1px solid rgba(255,255,255,.15) !important;
+  }
+}
+
+
+/* MOMENTS — DESKTOP CINEMATIC / FILM IMAGE */
+@media (min-width: 768px) {
+
+  .moment-card .moment-image {
+    position: relative !important;
+    width: 100% !important;
+    height: 500px !important;
+    min-height: 500px !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+    background: #050505 !important;
+  }
+
+  .moment-card .moment-image::before,
+  .moment-card .moment-image::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 14% !important;
+    background: #050505 !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+  }
+
+  .moment-card .moment-image::before {
+    top: 0 !important;
+  }
+
+  .moment-card .moment-image::after {
+    bottom: 0 !important;
+  }
+
+  .moment-card .moment-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+}
+
+
+/* MOMENTS — DESKTOP PROJECT-STYLE CAROUSEL */
+@media (min-width: 768px) {
+
+  .moment-card .moment-image {
+    position: relative !important;
+    width: 100% !important;
+    height: 500px !important;
+    min-height: 500px !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+    background: #050505 !important;
+  }
+
+  /* Hapus letterbox dari patch sebelumnya */
+  .moment-card .moment-image::before,
+  .moment-card .moment-image::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .moment-card .moment-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+  /* Indicator titik seperti carousel Projects */
+  .moment-card .moment-image::after {
+    content: "●  ○  ○" !important;
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 14px !important;
+    height: auto !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+    letter-spacing: 3px !important;
+    text-align: center !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,.6) !important;
+  }
+
+}
+
+
+/* =========================================================
+   MOMENTS DESKTOP — PROJECT STYLE CAROUSEL
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  .moments-carousel {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  .moments-carousel::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .moments-track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    gap: 24px !important;
+  }
+
+  .moment-card {
+    flex: 0 0 min(720px, calc(100vw - 120px)) !important;
+    width: min(720px, calc(100vw - 120px)) !important;
+    max-width: none !important;
+
+    scroll-snap-align: start !important;
+    box-sizing: border-box !important;
+  }
+
+  .moment-card .moment-image {
+    width: 100% !important;
+    height: 500px !important;
+    min-height: 500px !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+  }
+
+  .moment-card .moment-image::before,
+  .moment-card .moment-image::after {
+    display: none !important;
+  }
+
+  .moment-card .moment-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+}
+
+
+/* =========================================================
+   MOMENTS — RESTORE DESKTOP LAYOUT SEBELUM CAROUSEL
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  .moments-carousel {
+    width: calc(100% - 48px) !important;
+    margin-left: 24px !important;
+    margin-right: 24px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow-x: auto !important;
+    box-sizing: border-box !important;
+    scroll-snap-type: none !important;
+  }
+
+  .moments-track {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: initial !important;
+    box-sizing: border-box !important;
+  }
+
+  .moment-card {
+    width: auto !important;
+    max-width: none !important;
+    scroll-snap-align: none !important;
+    box-sizing: border-box !important;
+  }
+
+}
+
+
+/* MOMENTS — RESTORE CARD GAP */
+@media (min-width: 768px) {
+  .moments-track {
+    gap: 24px !important;
+  }
+
+  .moment-card {
+    flex-shrink: 0 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .moment-card {
+    flex: 0 0 92% !important;
+    width: 92% !important;
+    max-width: none !important;
+  }
+
+  .moments-track {
+    gap: 24px !important;
+  }
+}
