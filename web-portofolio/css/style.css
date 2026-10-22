@@ -14,11 +14,8 @@
    10. GitHub contributions
    11. Contact: judul loncat, ikon, popup, form
    12. Moments: kartu geser + frame foto (pakai .shot-stack dari 09)
-   ----------------------------------------------------------
-   Catatan: @theme dan base style Tailwind ada di <head> index.html
-   (harus di sana karena Tailwind browser hanya memproses
-   <style type="text/tailwindcss">).
-   ========================================================== */
+
+========================================================== */
 
 
 /* ==========================================================
@@ -694,10 +691,20 @@ section[id*="project" i] p {
 .moment-card .shot-btn:hover { background: #f1f1ed; color: #0e1116; }
 
 .moments-footer {
-  display: flex; justify-content: space-between; margin-top: .75rem;
+  display: flex; align-items: center; justify-content: space-between; margin-top: .75rem;
   font: 9px "JetBrains Mono", monospace; letter-spacing: .12em;
   color: rgba(28, 28, 28, .4);
 }
+.moments-nav { display: flex; align-items: center; gap: .5rem; }
+.moments-count { margin-right: .5rem; font-size: 11px; color: rgba(28, 28, 28, .5); }
+.moments-nav .shot-btn { color: #1c1c1c; }
+.moments-nav .shot-btn:hover { background: #1c1c1c; color: #e8e8e4; }
+.moments-nav .shot-btn:disabled { opacity: .3; pointer-events: none; }
+
+/* --- Geser pakai mouse (JS bagian 12) --- */
+.moments-carousel:focus-visible { outline: 2px solid rgba(28, 28, 28, .35); outline-offset: -2px; border-radius: 1.25rem; }
+@media (hover: hover) and (pointer: fine) { .moments-carousel { cursor: grab; } }
+.moments-carousel.is-dragging { cursor: grabbing; user-select: none; scroll-snap-type: none; scroll-behavior: auto; }
 
 /* --- Tablet + desktop: teks kiri, foto kanan --- */
 @media (min-width: 768px) {
@@ -708,11 +715,11 @@ section[id*="project" i] p {
   .moments-carousel { padding: 0 4rem 1rem; scroll-padding-left: 4rem; }
   .moments-track { gap: 1.5rem; }
 
-  .moment-card { flex-basis: min(980px, calc(100vw - 14rem)); padding: 1.25rem; }
-  .moment-body { display: grid; grid-template-columns: .8fr 1.2fr; gap: 2rem; padding-top: .75rem; }
+  .moment-card { flex-basis: min(1040px, calc(100vw - 12rem)); padding: 1.25rem; }
+  .moment-body { display: grid; grid-template-columns: .95fr 1.05fr; gap: 2rem; align-items: center; padding-top: .75rem; }
   .moment-media { order: 0; align-self: center; }
   .moment-copy { padding: .5rem .25rem; }
   .moment-title { font-size: clamp(1.9rem, 2.8vw, 2.6rem); }
   .moment-description { font-size: 1rem; }
-  .moment-card .shot-stage { margin-top: 2rem; }
+  .moment-card .shot-stage { margin-top: 2rem; padding-bottom: calc(80% + 36px); }   /* 5:4 di desktop */
 }
