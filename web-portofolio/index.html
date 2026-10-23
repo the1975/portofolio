@@ -47,8 +47,15 @@
     }
   </style>
 
-  <!-- CSS custom (daftar isi ada di dalam file) -->
-  <link rel="stylesheet" href="css/style.css">
+  <!-- CSS custom dipecah per bagian (daftar file ada di atas base.css); urutan ini penting (cascade) -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/skills.css">
+  <link rel="stylesheet" href="css/projects.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/moments.css">
+  <script src="js/season.js"></script>   <!-- pilih gambar frame sesuai musim, harus di head -->
 </head>
 
 <body class="font-sans text-ink">
@@ -173,7 +180,7 @@
 
           <!-- Foto -->
           <div class="reveal relative bg-ink rounded-3xl aspect-[4/5] md:aspect-[3/4] overflow-hidden shadow-2xl">
-            <img src="img/karina.jpeg" alt="Foto Leonardo" class="w-full h-full object-cover object-top">
+            <img src="img/karina.jpeg" alt="Foto Leonardo" class="w-full h-full object-cover object-top grayscale">
 
             <div class="absolute bottom-4 inset-x-4 hidden sm:flex bg-black/60 backdrop-blur rounded-xl px-4 py-3 text-paper items-center justify-between">
               <div>
