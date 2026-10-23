@@ -1,0 +1,167 @@
+/* =========================
+   css/hero.css - Hero: dekorasi, glitch headline, chip mindset (section 04-05)
+   Urutan muat di <head> index.html: 2 dari 7
+============================*/
+
+/*===========================
+   04. HERO: DEKORASI, LABEL, GLITCH HEADLINE
+============================= */
+
+/* --- Lingkaran dekoratif di belakang foto --- */
+.hero-decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-decoration::before,
+.hero-decoration::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.hero-decoration::before {
+  width: 520px;
+  height: 520px;
+  right: 8%;
+  border: 1px solid rgba(28, 28, 28, .18);
+}
+.hero-decoration::after {
+  width: 360px;
+  height: 360px;
+  right: 13%;
+  border: 1px solid rgba(28, 28, 28, .10);
+}
+
+/* --- Label kecil "WEB × DATA" dan "SYSTEM / 01" --- */
+.hero-label {
+  position: absolute;
+  z-index: 0;
+  font: 600 9px "JetBrains Mono", monospace;
+  letter-spacing: .18em;
+  color: rgba(28, 28, 28, .45);
+  white-space: nowrap;
+}
+.hero-label-1 { top: 20%;    left: 7%; }
+.hero-label-2 { bottom: 12%; left: 7%; }
+
+/* --- Glitch headline "Hi, I'm Leonardo." ---
+   Class .glitch-active ditoggle oleh JS (js/script.js bagian 11) */
+.hero-glitch {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+.hero-glitch::before,
+.hero-glitch::after {
+  content: attr(data-text);      /* teks diambil dari atribut data-text di HTML */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1;
+}
+.hero-glitch::before { color: #8b0000; transform: translateX(-3px); }  /* layer merah */
+.hero-glitch::after  { color: #004c99; transform: translateX(3px); }   /* layer biru */
+
+.hero-glitch.glitch-active::before { animation: glitchRed .18s steps(2) both; }
+.hero-glitch.glitch-active::after  { animation: glitchBlue .18s steps(2) both; }
+
+@keyframes glitchRed {
+  0%   { opacity: 0;  clip-path: inset(0 0 70% 0);   transform: translateX(-3px); }
+  20%  { opacity: .8; clip-path: inset(10% 0 55% 0); transform: translateX(-5px); }
+  40%  { opacity: .7; clip-path: inset(25% 0 35% 0); transform: translateX(-2px); }
+  70%  { opacity: .5; clip-path: inset(55% 0 15% 0); transform: translateX(-4px); }
+  100% { opacity: 0;  clip-path: inset(70% 0 5% 0);  transform: translateX(-3px); }
+}
+@keyframes glitchBlue {
+  0%   { opacity: 0;  clip-path: inset(60% 0 10% 0); transform: translateX(3px); }
+  20%  { opacity: .7; clip-path: inset(45% 0 25% 0); transform: translateX(5px); }
+  40%  { opacity: .6; clip-path: inset(30% 0 40% 0); transform: translateX(2px); }
+  70%  { opacity: .5; clip-path: inset(10% 0 65% 0); transform: translateX(4px); }
+  100% { opacity: 0;  clip-path: inset(5% 0 75% 0);  transform: translateX(3px); }
+}
+
+/* --- Glitch ringan yang jalan bareng (label + chip), tiap 8 detik --- */
+.hero-label,
+.hero-chip-glitch {
+  animation: syncGlitch 8s infinite;
+}
+@keyframes syncGlitch {
+  0%, 91%, 100% { transform: translate(0, 0);   filter: none; }
+  92%           { transform: translate(-2px, 0); filter: contrast(1.15); }
+  93%           { transform: translate(2px, 0);  filter: contrast(1.3); }
+  94%           { transform: translate(-1px, 0); filter: contrast(1.15); }
+  95%           { transform: translate(0, 0);    filter: none; }
+}
+
+/* --- Mobile: dekorasi disembunyikan, posisi label disesuaikan --- */
+@media (max-width: 768px) {
+  .hero-decoration { display: none; }
+  .hero-label      { animation: none; }
+  .hero-label-1    { top: 13%;    left: 7%; }
+  .hero-label-2    { bottom: 4%;  left: 7%; }
+}
+
+
+/* ==========================================================
+   05. HERO: CHIP MINDSET MELAYANG
+   ========================================================== */
+
+/* 1. Base chip */
+.hero-chip-glitch {
+  width: max-content;
+  height: auto;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  /* transisi saat chip pindah posisi */
+  transition:
+    left   .5s cubic-bezier(.22, 1, .36, 1),
+    right  .5s cubic-bezier(.22, 1, .36, 1),
+    top    .5s cubic-bezier(.22, 1, .36, 1),
+    bottom .5s cubic-bezier(.22, 1, .36, 1);
+}
+.hero-chip-glitch span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 2. Melayang naik-turun: pakai `translate` supaya tidak bentrok dengan glitch (`transform`) */
+@keyframes float-y {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -8px; }
+}
+.hero-chip-glitch.float-slow   { animation: float-y 5s ease-in-out infinite,       syncGlitch 8s infinite; }
+.hero-chip-glitch.float-slower { animation: float-y 6.5s ease-in-out -2s infinite, syncGlitch 8s infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-chip-glitch.float-slow,
+  .hero-chip-glitch.float-slower { animation: none; }
+}
+
+/* 3. Glitch sesaat ketika chip diklik (HARUS di bawah float, supaya menang) */
+.hero-chip-glitch.mindset-change { animation: mindsetChipChange .4s steps(2) both; }
+@keyframes mindsetChipChange {
+  0%   { transform: translate(0);      filter: none; }
+  25%  { transform: translate(-3px,0); filter: contrast(1.4); }
+  50%  { transform: translate(3px,0);  filter: contrast(1.7); }
+  75%  { transform: translate(-1px,0); }
+  100% { transform: translate(0);      filter: none; }
+}
+
+/* 4. Chip tidak ditampilkan di HP */
+@media (max-width: 768px) {
+  .hero-chip-glitch { display: none !important; }
+}
