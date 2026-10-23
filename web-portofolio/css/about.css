@@ -1,0 +1,30 @@
+/* ==========================================================
+   06. ABOUT: KARTU BERTUMPUK & KATA MENYALA
+   ========================================================== */
+.about-section { background: #0e1116; }
+
+/* Kartu menumpuk saat scroll (transform diatur JS bagian 04) */
+.stack-card {
+  position: sticky;
+  transform-origin: 50% 0;
+  will-change: transform;
+}
+/* Lapisan gelap yang makin pekat saat kartu tertimpa */
+.stack-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  border-radius: inherit;
+  background: #000;
+  opacity: var(--dim, 0);
+  pointer-events: none;
+}
+
+/* Kata-kata paragraf About (opacity diatur JS bagian 10) */
+.about-word { display: inline-block; opacity: .15; will-change: opacity, transform; }
+#aboutText b { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-word { opacity: 1 !important; transform: none !important; }
+}
