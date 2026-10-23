@@ -1,0 +1,72 @@
+/* ==========================================================
+   07. SKILLS: IKON TECH STACK
+   ========================================================== */
+.tech-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: .75rem;
+  border: 1px solid rgba(232, 232, 228, .15);
+  background: rgba(232, 232, 228, .03);
+  transition: background-color .3s, border-color .3s, transform .3s;
+}
+.tech-icon img {
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: grayscale(1);
+  opacity: .75;
+  transition: filter .3s, opacity .3s;
+}
+.tech-icon:hover {
+  background: rgba(232, 232, 228, .08);
+  border-color: rgba(232, 232, 228, .35);
+  transform: translateY(-3px);
+}
+.tech-icon:hover img { filter: none; opacity: 1; }
+
+/* Tooltip nama teknologi */
+.tech-tip {
+  position: absolute;
+  bottom: calc(100% + .5rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: .25rem .5rem;
+  border-radius: .375rem;
+  background: #e8e8e4;
+  color: #1c1c1c;
+  font: 10px "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+}
+.tech-icon:hover .tech-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/* ==========================================================
+   08. SKILLS: SERTIFIKAT (COVERFLOW)
+   Posisi kartu diatur JS bagian 06 (fungsi layout)
+   ========================================================== */
+.cert-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .6);
+  transition: transform .7s cubic-bezier(.22, 1, .36, 1), opacity .5s ease, filter .5s ease;
+  will-change: transform;
+}
+.cert-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#certInfo { transition: opacity .25s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-card { transition: none; }
+}
