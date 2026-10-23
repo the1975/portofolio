@@ -1,0 +1,72 @@
+/* ========================
+css/base.css - Bingkai, animasi reveal, komponen kecil (section 01-03)
+Urutan muat di <head> index.html: 1 dari 7
+   
+===========================
+   01. BINGKAI & BACKGROUND
+=========================== */
+
+.frame-bg {
+  background-color: #1c0f0a;                         /* warna cadangan saat gambar belum termuat */
+  background-image: url('../img/frame/autumn.jpg');  /* gambar bawaan (path naik 1 folder karena file ini di /css) */
+  background-size: cover;                            /* satu gambar utuh, tidak berulang */
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Tema musim: js/season.js mengisi data-season di <html>.
+   Tambah tema baru (mis. hari besar): taruh gambar di img/frame/, tambah satu baris
+   di sini dan satu baris di daftar SEASONS pada script.js. */
+html[data-season="spring"] .frame-bg { background-image: url('../img/frame/spring.jpg'); background-color: #1b2a0e; }
+html[data-season="summer"] .frame-bg { background-image: url('../img/frame/summer.jpg'); background-color: #0a1a0f; }
+html[data-season="autumn"] .frame-bg { background-image: url('../img/frame/autumn.jpg'); background-color: #1c0f0a; }
+html[data-season="winter"] .frame-bg { background-image: url('../img/frame/winter.jpg'); background-color: #11161d; }
+
+
+
+/* =====================
+02. ANIMASI MUNCUL SAAT SCROLL
+Class .show ditambahkan oleh JS (js/script.js bagian 01)
+========================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-reveal,
+  .animate-marquee { animation: none; }
+}
+
+
+/* ==========================
+   03. KOMPONEN KECIL
+============================= */
+
+/* Label teknologi di kartu project */
+.tag {
+  padding: .25rem .75rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  font: 10px "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+}
+
+/* Tombol sosmed bulat di hero */
+.social-btn {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: .75rem;
+  border: 1px solid rgba(28, 28, 28, .15);
+  background: rgba(255, 255, 255, .5);
+  transition: background-color .2s, color .2s;
+}
+.social-btn:hover { background: #1c1c1c; color: #e8e8e4; }
