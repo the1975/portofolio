@@ -34,7 +34,8 @@
       e.preventDefault();
       // Posisi About = dasar hero (jarak antar kartu 24px sudah impas dengan offset top 24px)
       const y = hero.getBoundingClientRect().bottom + window.scrollY;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      if (window.lenis) window.lenis.scrollTo(y);              // laptop: ikut scroll halus Lenis
+      else window.scrollTo({ top: y, behavior: 'smooth' });    // HP / tanpa Lenis: bawaan browser
     });
   });
 })();
