@@ -12,7 +12,7 @@ Urutan muat di <head> index.html: 1 dari 7
 html[data-season="spring"] .frame-bg { background-image: url('img/frame/daunspring.jpg'); background-color: #1b2a0e; }
 html[data-season="summer"] .frame-bg { background-image: url('img/frame/daunsummer.jpg'); background-color: #0a1a0f; }
 html[data-season="autumn"] .frame-bg { background-image: url('img/frame/daungugur.jpg'); background-color: #1c0f0a; }
-html[data-season="winter"] .frame-bg { background-image: url('img/frame/daunwinter.jpg'); background-color: #11161d; }
+html[data-season="winter"] .frame-bg { background-image: url('../img/frame/daunwinter.jpg'); background-color: #11161d; }
 
 
 
