@@ -59,3 +59,11 @@ Class .show ditambahkan oleh JS (js/script.js bagian 01)
   transition: background-color .2s, color .2s;
 }
 .social-btn:hover { background: #1c1c1c; color: #e8e8e4; }
+
+/* lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
