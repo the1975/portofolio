@@ -7,28 +7,28 @@
   const CERTS = [
     { title: 'Dasar Pemrograman Web', issuer: 'Dicoding / Google Developers', date: '2026',
       desc: 'Menyelesaikan kelas Dasar Pemrograman Web dari Dicoding dengan mempelajari dasar HTML dan CSS untuk membangun halaman web.',
-      image: '../img/sertifikat/DasarPemogramanWeb.jpg', link: 'https://drive.google.com/file/d/1SHUnZHOastnwDPW0b03U6syp8VG7NEl7/view?usp=drivesdk' },
+      image: 'img/sertifikat/DasarPemogramanWeb.jpg', link: 'https://drive.google.com/file/d/1SHUnZHOastnwDPW0b03U6syp8VG7NEl7/view?usp=drivesdk' },
     { title: 'Dasar Pemrograman JavaScript', issuer: 'Dicoding', date: '2026',
       desc: 'Menyelesaikan kelas Dasar Pemrograman JavaScript dari Dicoding dengan mempelajari fundamental JavaScript untuk membangun interaksi pada website.',
-      image: '../img/sertifikat/Dasar-Js.jpg', link: 'https://drive.google.com/file/d/1hVj94UYxid7y2K5bTA0i1sCboJo9PTWk/view?usp=drivesdk' },
+      image: 'img/sertifikat/Dasar-Js.jpg', link: 'https://drive.google.com/file/d/1hVj94UYxid7y2K5bTA0i1sCboJo9PTWk/view?usp=drivesdk' },
     { title: 'Membuat Front-End Web Untuk Pemula', issuer: 'Dicoding', date: '2026',
       desc: 'Menyelesaikan kelas Belajar Membuat Front-End Web untuk Pemula dari Dicoding dengan mempelajari dasar pengembangan front-end menggunakan HTML, CSS, dan JavaScript.',
-      image: '../img/sertifikat/FrontEndPemula.jpg', link: 'https://drive.google.com/file/d/17J2L7T68c4_-K9LA3QaoXKJeQxhf2m8s/view?usp=drivesdk' },
+      image: 'img/sertifikat/FrontEndPemula.jpg', link: 'https://drive.google.com/file/d/17J2L7T68c4_-K9LA3QaoXKJeQxhf2m8s/view?usp=drivesdk' },
     { title: 'Strategi Pengembangan Diri', issuer: 'Dicoding', date: '2026',
       desc: 'Mempelajari strategi untuk mengembangkan potensi diri dan meningkatkan kesiapan menghadapi dunia profesional.',
-      image: '../img/sertifikat/StrategiPengembangan.jpg', link: 'https://drive.google.com/file/d/1VnrJMLuFk6R4L7AbXaiVLVrh1nbeK0Fk/view?usp=drivesdk' },
+      image: 'img/sertifikat/StrategiPengembangan.jpg', link: 'https://drive.google.com/file/d/1VnrJMLuFk6R4L7AbXaiVLVrh1nbeK0Fk/view?usp=drivesdk' },
     { title: 'Financial Literacy', issuer: 'Dicoding', date: '2026',
       desc: 'Mempelajari dasar literasi keuangan, termasuk pengelolaan keuangan pribadi, perencanaan finansial, dan pengambilan keputusan keuangan yang bijak.',
-      image: '../img/sertifikat/Financial-literacy.jpg', link: 'https://drive.google.com/file/d/1PSoQsLV6AHzc2aYxRYmeeXfKFZ70kzGV/view?usp=drivesdk' },
+      image: 'img/sertifikat/Financial-literacy.jpg', link: 'https://drive.google.com/file/d/1PSoQsLV6AHzc2aYxRYmeeXfKFZ70kzGV/view?usp=drivesdk' },
     { title: 'Spec-Driven Development dengan Kiro', issuer: 'Dicoding / AWS', date: '2026',
       desc: 'Mempelajari pendekatan Spec-Driven Development untuk merancang dan mengembangkan perangkat lunak secara terstruktur dengan bantuan Kiro.',
-      image: '../img/sertifikat/Spec-DrivenDevelopmentdenganKiro.jpg', link: 'https://drive.google.com/file/d/137NBaeVzkzd7YpttS8Kox5CmnDGQ-Ow7/view?usp=drivesdk' },
+      image: 'img/sertifikat/Spec-DrivenDevelopmentdenganKiro.jpg', link: 'https://drive.google.com/file/d/137NBaeVzkzd7YpttS8Kox5CmnDGQ-Ow7/view?usp=drivesdk' },
     { title: 'Python Programming With RedHat', issuer: 'RedHat Academy', date: '2026',
       desc: 'Mempelajari dasar pemrograman Python, termasuk sintaks, struktur data, fungsi, serta penerapan logika pemrograman untuk menyelesaikan masalah.',
-      image: '../img/sertifikat/RedHat.jpg', link: 'https://drive.google.com/file/d/1l0JW3VjHuyMq6YhwMUUre6qwnaWjVQT3/view?usp=drivesdk' },
+      image: 'img/sertifikat/RedHat.jpg', link: 'https://drive.google.com/file/d/1l0JW3VjHuyMq6YhwMUUre6qwnaWjVQT3/view?usp=drivesdk' },
     { title: 'Etika, Kesadaran, dan Identitas Manusia di Era Sistem Informasi Digital', issuer: 'UNP Kediri / UM', date: '2025',
       desc: 'Mempelajari etika, kesadaran, dan identitas manusia serta penerapan etika AI dalam perspektif Sistem Informasi.',
-      image: '../img/sertifikat/KuliahTamu.jpg', link: 'https://drive.google.com/file/d/1oF7OXaSraGDbcMCNdTlp7QE5U4mnXmgH/view?usp=drivesdk' }
+      image: 'img/sertifikat/KuliahTamu.jpg', link: 'https://drive.google.com/file/d/1oF7OXaSraGDbcMCNdTlp7QE5U4mnXmgH/view?usp=drivesdk' }
   ];
 
   /* ----- ELEMEN HTML ----- */
