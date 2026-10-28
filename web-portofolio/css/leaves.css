@@ -28,5 +28,3 @@ html[data-season="winter"] .hero-leaves { background-image: url('../img/frame/da
 @media (max-width: 768px) {
   .hero-leaves { --leaf-radius: 180px; }
 }
-
-.leaf-zone > .hero-leaves { opacity: 1 !important; }
