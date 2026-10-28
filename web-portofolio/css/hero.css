@@ -165,28 +165,3 @@
 @media (max-width: 768px) {
   .hero-chip-glitch { display: none !important; }
 }
-
-/* 06. HERO: DAUN MUSIMAN MUNCUL MENGIKUTI KURSOR / JARI */
-.hero-leaves {
-  --leaf-radius: 260px;   /* ukuran sorotan */
-  --mx: 50%;
-  --my: 50%;
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;             /* diubah JS */
-  transition: opacity .6s ease;
-  -webkit-mask-image: radial-gradient(circle var(--leaf-radius) at var(--mx) var(--my), #000 0%, rgba(0,0,0,.55) 45%, transparent 100%);
-  mask-image: radial-gradient(circle var(--leaf-radius) at var(--mx) var(--my), #000 0%, rgba(0,0,0,.55) 45%, transparent 100%);
-}
-html[data-season="spring"] .hero-leaves { background-image: url('../img/frame/daunspring.jpg'); }
-html[data-season="summer"] .hero-leaves { background-image: url('../img/frame/daunsummer.jpg'); }
-html[data-season="autumn"] .hero-leaves { background-image: url('../img/frame/daungugur.jpg'); }
-html[data-season="winter"] .hero-leaves { background-image: url('../img/frame/daunwinter.jpg'); }
-
-@media (max-width: 768px) {
-  .hero-leaves { --leaf-radius: 180px; }
-}
