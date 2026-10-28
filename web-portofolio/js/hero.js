@@ -172,3 +172,52 @@
   setupChip(chip1, text1, LEFT_POSITIONS, 0);
   setupChip(chip2, text2, RIGHT_POSITIONS, 1);
 })();
+
+/* 06. DAUN MUSIMAN MUNCUL MENGIKUTI KURSOR / JARI
+   Layer .hero-leaves di-mask lingkaran yang ngikutin pointer.
+   Pointer diam 1,2 detik -> daun memudar. */
+(() => {
+  const hero = document.querySelector('.hero');
+  const leaves = hero && hero.querySelector('.hero-leaves');
+  if (!leaves) return;
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FOLLOW = 0.18;    // makin besar makin cepat ngejar
+  const IDLE_MS = 1200;   // jeda sebelum memudar
+
+  let targetX = 0, targetY = 0, curX = 0, curY = 0;
+  let raf = null, idleTimer = null, started = false;
+
+  function render() {
+    curX += (targetX - curX) * FOLLOW;
+    curY += (targetY - curY) * FOLLOW;
+    leaves.style.setProperty('--mx', curX.toFixed(1) + 'px');
+    leaves.style.setProperty('--my', curY.toFixed(1) + 'px');
+    const done = Math.abs(targetX - curX) < .5 && Math.abs(targetY - curY) < .5;
+    raf = done ? null : requestAnimationFrame(render);
+  }
+
+  function hide() { leaves.style.opacity = '0'; }
+
+  function onMove(e) {
+    const rect = hero.getBoundingClientRect();
+    const inside = e.clientX >= rect.left && e.clientX <= rect.right &&
+                   e.clientY >= rect.top  && e.clientY <= rect.bottom;
+    if (!inside) return hide();
+
+    targetX = e.clientX - rect.left;
+    targetY = e.clientY - rect.top;
+    if (!started || reduceMotion) { curX = targetX; curY = targetY; started = true; }
+
+    leaves.style.opacity = '1';
+    if (!raf) raf = requestAnimationFrame(render);
+
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(hide, IDLE_MS);
+  }
+
+  // pointer events = mouse + sentuhan HP
+  window.addEventListener('pointermove', onMove, { passive: true });
+  window.addEventListener('pointerdown', onMove, { passive: true });
+  document.addEventListener('pointerleave', hide);
+})();
