@@ -1,22 +1,14 @@
-/* ==========================================================
-   LEAVES.CSS - Daun musiman di belakang section (hero, moments, github)
-   JS: js/leaves.js. Gambar musim dipilih js/season.js.
-   ========================================================== */
+/* LEAVES.CSS - wadah daun musiman (hero, moments, github). Logika di js/leaves.js */
 .hero-leaves {
-  --leaf-radius: 260px;   /* ukuran sorotan */
-  --mx: 50%;
-  --my: 50%;
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;             /* diubah JS */
-  transition: opacity 1.2s ease;
-  -webkit-mask-image: radial-gradient(circle var(--leaf-radius) at var(--mx) var(--my), #000 0%, rgba(0,0,0,.55) 45%, transparent 100%);
-  mask-image: radial-gradient(circle var(--leaf-radius) at var(--mx) var(--my), #000 0%, rgba(0,0,0,.55) 45%, transparent 100%);
+  background-repeat: no-repeat;
+  background-size: 0 0;   /* gambar hanya dibaca JS, tidak ditampilkan langsung */
 }
+.hero-leaves canvas { display: block; width: 100%; height: 100%; }
+
 html[data-season="spring"] .hero-leaves { background-image: url('../img/frame/daunspring.jpg'); }
 html[data-season="summer"] .hero-leaves { background-image: url('../img/frame/daunsummer.jpg'); }
 html[data-season="autumn"] .hero-leaves { background-image: url('../img/frame/daungugur.jpg'); }
@@ -24,7 +16,3 @@ html[data-season="winter"] .hero-leaves { background-image: url('../img/frame/da
 
 /* Zona di luar hero: layer di belakang konten */
 .leaf-zone > .hero-leaves { z-index: -1; }
-
-@media (max-width: 768px) {
-  .hero-leaves { --leaf-radius: 180px; }
-}
