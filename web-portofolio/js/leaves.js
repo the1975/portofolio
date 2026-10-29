@@ -12,8 +12,9 @@
 
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const TAU = reduceMotion ? 250 : 650;   // ms: makin besar makin lama memudar
-  const IDLE_MS = 2600;                   // setelah berhenti, jejak hilang total
+  const IDLE_MS = 2600;                   // diam selama ini, lalu mulai pudar total
   const FADE_STEP = 64;                   // ms: seberapa sering jejak dipudarkan
+  const FADE_OUT_MS = 900;                // ms: pudar terakhir sampai benar-benar hilang
   const isMobile = () => matchMedia('(max-width: 768px)').matches;
 
   zones.forEach((zone) => {
@@ -31,15 +32,18 @@
     img.src = found[1];
 
     const isHero = zone.classList.contains('hero');
+    const baseOpacity = isHero ? '1' : '0.6';             // luar hero lebih redup
+
     const cv = document.createElement('canvas');          // yang terlihat
     const ctx = cv.getContext('2d');
     const mk = document.createElement('canvas');          // "embun": area yang terbuka
     const mctx = mk.getContext('2d');
-    cv.style.opacity = isHero ? '1' : '0.6';              // luar hero lebih redup
+    cv.style.opacity = baseOpacity;
     layer.appendChild(cv);
 
     let W = 0, H = 0, R = 0, brush = null;
     let last = null, raf = null, lastMove = 0, lastT = 0, acc = 0;
+    let closing = false, closeTimer = null;
 
     function makeBrush() {
       R = (isHero ? 170 : 130) * (isMobile() ? 0.65 : 1);  // ukuran sapuan
@@ -78,6 +82,15 @@
       last = { x, y };
     }
 
+    // Setelah pudar total: bersihkan kanvas dan kembalikan opacity normal
+    function finish() {
+      mctx.clearRect(0, 0, W, H);
+      ctx.clearRect(0, 0, W, H);
+      cv.style.transition = 'none';
+      cv.style.opacity = baseOpacity;
+      closing = false;
+    }
+
     function frame(now) {
       const dt = Math.min(now - (lastT || now), 64);
       lastT = now;
@@ -103,12 +116,16 @@
       ctx.globalCompositeOperation = 'destination-in';
       ctx.drawImage(mk, 0, 0);
 
-      if (now - lastMove > IDLE_MS) {            // sudah lama diam: bersihkan, stop
-        mctx.clearRect(0, 0, W, H);
-        ctx.clearRect(0, 0, W, H);
+      // Sudah lama diam: pudarkan seluruh kanvas dengan halus, lalu bersihkan
+      if (now - lastMove > IDLE_MS) {
         raf = null; lastT = 0; acc = 0;
+        closing = true;
+        cv.style.transition = 'opacity ' + FADE_OUT_MS + 'ms ease';
+        cv.style.opacity = '0';
+        closeTimer = setTimeout(finish, FADE_OUT_MS + 60);
         return;
       }
+
       raf = requestAnimationFrame(frame);
     }
 
@@ -116,6 +133,15 @@
       const r = zone.getBoundingClientRect();
       const x = e.clientX - r.left, y = e.clientY - r.top;
       if (x < 0 || y < 0 || x > r.width || y > r.height) { last = null; return; }
+
+      // Bergerak lagi saat sedang memudar: batalkan pudarnya
+      if (closing) {
+        clearTimeout(closeTimer);
+        cv.style.transition = 'opacity .15s ease';
+        cv.style.opacity = baseOpacity;
+        closing = false;
+      }
+
       stamp(x, y);
       lastMove = performance.now();
       if (!raf) { lastT = 0; acc = 0; raf = requestAnimationFrame(frame); }
