@@ -44,7 +44,11 @@
     let W = 0, H = 0, R = 0, brush = null;
     let last = null, raf = null, lastMove = 0, lastT = 0, acc = 0;
     let closing = false, closeTimer = null;
-    let offset = 0;                                       // posisi kanvas di dalam zona (untuk zona tinggi)
+    let offset = 0;
+    const tmp = document.createElement('canvas');
+    // kanvas bantu untuk menggeser jejak
+    const tctx = tmp.getContext('2d');
+    // posisi kanvas di dalam zona (untuk zona tinggi)
 
     function makeBrush() {
       R = (isHero ? 115 : 100) * (isMobile() ? 0.65 : 1);  // ukuran sapuan
@@ -65,18 +69,34 @@
       const r = zone.getBoundingClientRect();
       W = Math.max(1, Math.round(r.width));
       H = Math.max(1, Math.round(Math.min(r.height, window.innerHeight)));
-      cv.width = mk.width = W;
-      cv.height = mk.height = H;
+      cv.width = mk.width = tmp.width = W;
+      cv.height = mk.height = tmp.height = H;
       cv.style.height = H + 'px';
       makeBrush();
       place();
     }
 
-    // Geser kanvas supaya selalu berada di area layar yang sedang terlihat
+    // Geser jejak sebesar d piksel ke atas (dipakai saat halaman di-scroll)
+    function shift(d) {
+      if (Math.abs(d) >= H) { mctx.clearRect(0, 0, W, H); return; }
+      tctx.clearRect(0, 0, W, H);
+      tctx.drawImage(mk, 0, 0);
+      mctx.clearRect(0, 0, W, H);
+      mctx.drawImage(tmp, 0, -d);
+    }
+    
+    // Geser kanvas supaya selalu berada di area layar yang sedang terlihat.
+    // Jejak ikut digeser berlawanan arah, jadi daun tetap "menempel" di halaman
+    // dan tidak ikut bergerak saat di-scroll.
     function place() {
       const r = zone.getBoundingClientRect();
       const o = Math.min(Math.max(-r.top, 0), Math.max(0, r.height - H));
-      if (o !== offset) { offset = o; last = null; }       // zona bergeser: putus garis sapuan
+      if (o !== offset) {
+        const d = o - offset;
+        shift(d);
+        if (last) last = { x: last.x, y: last.y - d };
+        offset = o;
+      }
       cv.style.transform = 'translateY(' + o + 'px)';
       return r;
     }
