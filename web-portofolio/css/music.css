@@ -28,7 +28,7 @@
 .music-stack { position: relative; margin-top: 14px; }
 .music-stack::before,
 .music-stack::after {
-  content: ""; position: absolute; left: 0; right: 0; height: 100%;
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 100%;
   border-radius: 16px; background: #1c1c1c; z-index: 0;
 }
 .music-stack::before { transform: translateY(-12px) scale(.94); opacity: .18; }
