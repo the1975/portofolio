@@ -7,8 +7,8 @@
 (() => {
   const PLAYLISTS = [
     { name: 'FAVORITES', id: '0rrZvtqBxtelJycIUBh449' },
-    // { name: 'CHILL',  id: 'ISI_ID_PLAYLIST' },
-    // { name: 'FOCUS',  id: 'ISI_ID_PLAYLIST' },
+    { name: 'CHILL',  id: '1W5EDOA0xOYKroTcsfP8ia' },
+    { name: 'FOCUS',  id: '0QvcKY0WILLAqIZDy1wCTw' },
   ];
 
   const SETTLE_MS = 350;      // tunggu sebentar setelah iframe selesai, biar isinya sempat tampil
