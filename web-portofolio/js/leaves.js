@@ -46,7 +46,7 @@
     let closing = false, closeTimer = null;
 
     function makeBrush() {
-      R = (isHero ? 170 : 130) * (isMobile() ? 0.65 : 1);  // ukuran sapuan
+      R = (isHero ? 115 : 100) * (isMobile() ? 0.65 : 1);  // ukuran sapuan
       brush = document.createElement('canvas');
       brush.width = brush.height = R * 2;
       const b = brush.getContext('2d');
