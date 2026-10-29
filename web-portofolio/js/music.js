@@ -8,7 +8,7 @@
   const PLAYLISTS = [
     { name: 'FAVORITES', id: '0rrZvtqBxtelJycIUBh449' },
     { name: 'CHILL',  id: '1W5EDOA0xOYKroTcsfP8ia' },
-    // { name: 'FOCUS',  id: 'ISI_ID_PLAYLIST' },
+    { name: 'FOCUS',  id: '0QvcKY0WILLAqIZDy1wCTw' },
   ];
 
   const frame = document.getElementById('musicFrame');
