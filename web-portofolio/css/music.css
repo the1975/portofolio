@@ -1,0 +1,25 @@
+/* MUSIC.CSS - equalizer hiasan di section On Repeat */
+.eq { display: flex; align-items: flex-end; gap: 5px; height: 56px; }
+.eq i {
+  width: 5px; height: 100%;
+  border-radius: 3px;
+  background: #1c1c1c;
+  opacity: .8;
+  transform-origin: bottom;
+  animation: eq 1s ease-in-out infinite;
+}
+/* Variasi tempo supaya tidak kompak naik-turun bersamaan */
+.eq i:nth-child(4n+1) { animation-duration: 1s;    animation-delay: -.2s; }
+.eq i:nth-child(4n+2) { animation-duration: 1.3s;  animation-delay: -.6s; }
+.eq i:nth-child(4n+3) { animation-duration: .8s;   animation-delay: -.1s; }
+.eq i:nth-child(4n+4) { animation-duration: 1.15s; animation-delay: -.9s; }
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(.18); }
+  50%      { transform: scaleY(1); }
+}
+
+/* Hormati pengguna yang mematikan animasi di perangkatnya */
+@media (prefers-reduced-motion: reduce) {
+  .eq i { animation: none; transform: scaleY(.5); }
+}
