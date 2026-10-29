@@ -10,7 +10,7 @@
     { name: 'autumn', months: [9, 10, 11] },
     { name: 'winter', months: [12, 1, 2] },
   ];
-  const DEFAULT_SEASON = 'autumn';   // dipakai kalau bulan ini tidak masuk daftar mana pun
+  const DEFAULT_SEASON = 'winter';   // dipakai kalau bulan ini tidak masuk daftar mana pun
 
   const month = new Date().getMonth() + 1;
   const wanted = new URLSearchParams(location.search).get('season');   // untuk uji coba lewat URL
