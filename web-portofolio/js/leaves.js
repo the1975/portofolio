@@ -44,6 +44,7 @@
     let W = 0, H = 0, R = 0, brush = null;
     let last = null, raf = null, lastMove = 0, lastT = 0, acc = 0;
     let closing = false, closeTimer = null;
+    let offset = 0;                                       // posisi kanvas di dalam zona (untuk zona tinggi)
 
     function makeBrush() {
       R = (isHero ? 115 : 100) * (isMobile() ? 0.65 : 1);  // ukuran sapuan
@@ -58,13 +59,30 @@
       b.fillRect(0, 0, R * 2, R * 2);
     }
 
+    // Kanvas dibuat paling tinggi setinggi layar, supaya zona yang panjang
+    // (misalnya Projects) tidak membuat kanvas raksasa yang gagal di HP.
     function resize() {
       const r = zone.getBoundingClientRect();
-      W = cv.width = mk.width = Math.max(1, Math.round(r.width));
-      H = cv.height = mk.height = Math.max(1, Math.round(r.height));
+      W = Math.max(1, Math.round(r.width));
+      H = Math.max(1, Math.round(Math.min(r.height, window.innerHeight)));
+      cv.width = mk.width = W;
+      cv.height = mk.height = H;
+      cv.style.height = H + 'px';
       makeBrush();
+      place();
     }
+
+    // Geser kanvas supaya selalu berada di area layar yang sedang terlihat
+    function place() {
+      const r = zone.getBoundingClientRect();
+      const o = Math.min(Math.max(-r.top, 0), Math.max(0, r.height - H));
+      if (o !== offset) { offset = o; last = null; }       // zona bergeser: putus garis sapuan
+      cv.style.transform = 'translateY(' + o + 'px)';
+      return r;
+    }
+
     new ResizeObserver(resize).observe(zone);
+    window.addEventListener('resize', resize);
     resize();
 
     // Tempel sapuan di titik pointer (disambung garis supaya jejak mulus)
@@ -94,6 +112,7 @@
     function frame(now) {
       const dt = Math.min(now - (lastT || now), 64);
       lastT = now;
+      place();
 
       // Pudarkan jejak sedikit demi sedikit
       acc += dt;
@@ -130,9 +149,9 @@
     }
 
     function onMove(e) {
-      const r = zone.getBoundingClientRect();
-      const x = e.clientX - r.left, y = e.clientY - r.top;
-      if (x < 0 || y < 0 || x > r.width || y > r.height) { last = null; return; }
+      const r = place();
+      const x = e.clientX - r.left, y = e.clientY - r.top - offset;
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) { last = null; return; }
 
       // Bergerak lagi saat sedang memudar: batalkan pudarnya
       if (closing) {
