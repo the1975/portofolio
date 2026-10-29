@@ -46,3 +46,32 @@
   display: flex; align-items: center; justify-content: space-between;
   gap: 1rem; margin-top: 1rem;
 }
+
+/* Layar loading saat ganti playlist */
+.music-loading {
+  position: absolute; inset: 0; z-index: 2;
+  border-radius: 16px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px;
+  background: linear-gradient(110deg, #161616 30%, #242424 50%, #161616 70%);
+  background-size: 200% 100%;
+  animation: music-shimmer 1.4s linear infinite;
+  color: rgba(232, 232, 228, .5);
+  font: 10px/1 "JetBrains Mono", monospace;
+  letter-spacing: .2em;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+}
+.music-stack.is-loading .music-loading { opacity: 1; }
+
+.music-loading .eq { height: 36px; }
+.music-loading .eq i { background: #e8e8e4; }
+
+@keyframes music-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-loading { animation: none; }
+}
