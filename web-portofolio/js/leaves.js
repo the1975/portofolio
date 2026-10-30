@@ -198,6 +198,3 @@
     document.addEventListener('pointerleave', () => { last = null; });
   });
 })();
-
-  // HP (< 768px): efek dimatikan. Gambar daun juga jadi tidak ikut diunduh, hemat kuota.
-  if (matchMedia('(max-width: 767px)').matches) return;
