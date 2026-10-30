@@ -148,9 +148,15 @@
       ctx.globalCompositeOperation = 'source-over';
       ctx.clearRect(0, 0, W, H);
       if (ready) {
-        const s = Math.max(W / img.naturalWidth, H / img.naturalHeight);   // cover
-        const w = img.naturalWidth * s, h = img.naturalHeight * s;
-        ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+        // Ubin: gambar diulang (ditumpuk) dan menempel ke HALAMAN, bukan ke layar.
+        // Laptop 3 kolom, HP 1 kolom. Tinggi section sepanjang apa pun tetap stabil.
+        const cols = isMobile() ? 1 : 3;
+        const tw = Math.ceil(W / cols);                                // lebar 1 ubin
+        const th = Math.round(tw * img.naturalHeight / img.naturalWidth); // tinggi ikut rasio
+        const firstRow = Math.floor(offset / th);                      // baris ubin pertama yang terlihat
+        for (let ty = firstRow * th - offset; ty < H; ty += th) {      // "- offset" = kunci ke halaman
+          for (let c = 0; c < cols; c++) ctx.drawImage(img, c * tw, ty, tw, th);
+        }
       }
       ctx.globalCompositeOperation = 'destination-in';
       ctx.drawImage(mk, 0, 0);
