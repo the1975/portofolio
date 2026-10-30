@@ -1,10 +1,10 @@
 /* ==========================================================
    PROJECTS-PAGE.JS - Logika halaman projects.html
-   Alur: data (projects-data.js) -> filter (kategori + search) -> tampil.
-   Ini mengasah: state sederhana (active, query) + render ulang.
+   Alur: data (projects-data.js) -> filter (kategori + search) -> etalase kartu.
+   Ini mengasah: state sederhana + render ulang + animasi bertahap.
    ========================================================== */
 (() => {
-  /* ---------- 1. IKON (isi <svg>, gaya garis) ---------- */
+  /* ---------- 1. IKON ---------- */
   const ICONS = {
     all:       '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
     web:       '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
@@ -27,22 +27,25 @@
   let active = 'all';   // kategori yang dipilih
   let query = '';       // teks pencarian
 
-  /* ---------- 3. NAVIGASI (sidebar + bar bawah dari data yang sama) ---------- */
-  const ON  = 'bg-ink text-paper';
-  const OFF = 'text-ink/50 hover:text-ink';
-
-  function renderNav() {
+  /* ---------- 3. NAVIGASI ----------
+     Tombol dibuat SEKALI. Saat ganti kategori cuma class "is-active" yang
+     berpindah, jadi transisi CSS bisa berjalan (kalau dibuat ulang, animasinya hilang). */
+  function buildNav() {
     // Sidebar laptop: ikon saja (title = tooltip)
     sideEl.innerHTML = PROJECT_CATEGORIES.map((c) =>
       '<button type="button" data-cat="' + c.key + '" title="' + c.label + '" aria-label="' + c.label + '" ' +
-      'class="w-11 h-11 rounded-2xl grid place-items-center transition ' + (c.key === active ? ON : OFF) + '">' +
-      icon(c.key) + '</button>').join('');
+      'class="nav-btn w-11 h-11 rounded-2xl grid place-items-center">' + icon(c.key) + '</button>').join('');
 
-    // Bar bawah HP: ikon + label pendek (kata pertama, mis. "Data Processing" -> "Data")
+    // Bar bawah HP: ikon + label pendek ("Data Processing" -> "Data")
     bottomEl.innerHTML = PROJECT_CATEGORIES.map((c) =>
       '<button type="button" data-cat="' + c.key + '" aria-label="' + c.label + '" ' +
-      'class="flex-1 min-w-0 flex flex-col items-center gap-1 py-2 rounded-xl font-mono text-[10px] tracking-wide transition ' +
-      (c.key === active ? ON : OFF) + '">' + icon(c.key) + '<span>' + c.label.split(' ')[0] + '</span></button>').join('');
+      'class="nav-btn flex-1 min-w-0 flex flex-col items-center gap-1 py-2 rounded-xl font-mono text-[10px] tracking-wide">' +
+      icon(c.key) + '<span>' + c.label.split(' ')[0] + '</span></button>').join('');
+  }
+
+  function setActive() {
+    document.querySelectorAll('[data-cat]').forEach((btn) =>
+      btn.classList.toggle('is-active', btn.dataset.cat === active));
   }
 
   /* ---------- 4. FILTER ---------- */
@@ -50,34 +53,54 @@
     const q = query.trim().toLowerCase();
     return PROJECTS.filter((p) => {
       const okCat = active === 'all' || p.category === active;
-      // cari di judul, deskripsi, dan tag
       const okQuery = !q || (p.title + ' ' + p.desc + ' ' + p.tags.join(' ')).toLowerCase().includes(q);
       return okCat && okQuery;
     });
   }
 
-  /* ---------- 5. TAMPILKAN ---------- */
+  /* ---------- 5. KARTU ETALASE ---------- */
+  function cardHTML(p, i) {
+    const num = String(i + 1).padStart(2, '0');        // nomor urut di daftar yang tampil
+    const cover = p.shots && p.shots[0];               // foto pertama jadi sampul
+    const delay = Math.min(i, 8) * 60;                 // muncul bertahap, maksimal 8 kartu
+
+    return '<button type="button" data-open="' + PROJECTS.indexOf(p) + '" ' +
+      'class="showcase-card card-in text-left bg-white rounded-3xl p-4 w-full" style="animation-delay:' + delay + 'ms">' +
+        '<div class="flex justify-between font-mono text-[11px] tracking-widest text-ink/50 mb-3 px-1">' +
+          '<span>' + num + ' / PROJECT</span><span>' + p.year + '</span></div>' +
+        // Sampul: tulisan NO PREVIEW tampil di belakang, tertutup foto kalau fotonya ada
+        '<div class="relative aspect-[16/10] rounded-2xl overflow-hidden bg-ink/5 grid place-items-center font-mono text-[10px] tracking-widest text-ink/30">' +
+          '<span>NO PREVIEW</span>' +
+          (cover ? '<img src="' + cover + '" alt="' + p.title + '" loading="lazy" decoding="async" ' +
+                   'class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display=\'none\'">' : '') +
+        '</div>' +
+        '<h3 class="font-serif text-xl mt-4 px-1">' + p.title + '</h3>' +
+        '<div class="flex flex-wrap gap-2 mt-3 px-1">' + p.tags.map((t) => '<span class="tag">' + t + '</span>').join('') + '</div>' +
+      '</button>';
+  }
+
   function renderList() {
     const items = filtered();
     const cat = PROJECT_CATEGORIES.find((c) => c.key === active);
     titleEl.textContent = active === 'all' ? 'Semua Project' : cat.label;
     countEl.textContent = items.length + ' PROJECT';
 
-    // SEMENTARA: baris teks. Langkah 2 diganti kartu beneran.
     listEl.innerHTML = items.length
-      ? items.map((p) =>
-          '<p class="font-mono text-sm py-3 border-t border-ink/15">' + p.title + ' · ' + p.category + '</p>').join('')
-      : '<p class="text-sm text-ink/50 border-t border-ink/15 pt-4">Belum ada project di sini.</p>';
+      ? items.map(cardHTML).join('')
+      : '<p class="text-sm text-ink/50 col-span-full">Belum ada project di sini.</p>';
   }
 
   /* ---------- 6. EVENT ---------- */
-  // Satu listener untuk semua tombol kategori (sidebar maupun bar bawah)
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-cat]');
-    if (!btn) return;
-    active = btn.dataset.cat;
-    renderNav();
-    renderList();
+    const catBtn = e.target.closest('[data-cat]');
+    if (catBtn) {
+      active = catBtn.dataset.cat;
+      setActive();
+      renderList();
+      return;
+    }
+    // Klik kartu: popup detail dibuat di langkah berikutnya
+    // const openBtn = e.target.closest('[data-open]');
   });
 
   searchEl.addEventListener('input', () => {
@@ -86,6 +109,7 @@
   });
 
   /* ---------- 7. MULAI ---------- */
-  renderNav();
+  buildNav();
+  setActive();
   renderList();
 })();
