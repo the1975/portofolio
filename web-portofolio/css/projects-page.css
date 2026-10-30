@@ -58,3 +58,53 @@
   .nav-btn:hover .nav-tip,
   .nav-btn:focus-visible .nav-tip { opacity: 1; transform: translate(0, -50%); }
 }
+
+/* ==========================================================
+   POPUP DETAIL PROJECT
+   HP: lembar dari bawah | Laptop: kartu di tengah
+   ========================================================== */
+.project-modal {
+  padding: 0; border: 0;
+  background: #e8e8e4; color: #1c1c1c;
+  width: 100%; max-width: 100%; max-height: none;
+  margin: auto 0 0;                       /* menempel di bawah layar */
+  border-radius: 1.5rem 1.5rem 0 0;
+  overflow: hidden;
+  box-shadow: 0 -10px 60px rgba(0, 0, 0, .35);
+}
+.project-modal[open] { animation: pm-up .45s cubic-bezier(.22, 1, .36, 1); }
+.project-modal::backdrop { background: rgba(14, 17, 22, .6); backdrop-filter: blur(6px); }
+
+/* Area isi yang bisa di-scroll sendiri */
+.pm-scroll { max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain; }
+
+/* Kunci scroll halaman di belakang saat popup terbuka */
+html.modal-open { overflow: hidden; }
+
+@keyframes pm-up  { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+@keyframes pm-pop { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
+
+@media (min-width: 768px) {
+  .project-modal {
+    width: min(64rem, calc(100% - 3rem));
+    margin: auto;
+    border-radius: 1.5rem;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
+  }
+  .project-modal[open] { animation-name: pm-pop; }
+  .pm-scroll { max-height: 88dvh; }
+}
+
+/* Thumbnail foto kecil di bawah foto besar */
+.pm-thumb {
+  flex-shrink: 0; width: 4.5rem; aspect-ratio: 16 / 10;
+  border-radius: .75rem; overflow: hidden;
+  border: 2px solid transparent; background: rgba(28, 28, 28, .05);
+  opacity: .5; transition: opacity .2s ease, border-color .2s ease;
+}
+.pm-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pm-thumb.is-active { opacity: 1; border-color: #1c1c1c; }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-modal[open] { animation: none; }
+}
