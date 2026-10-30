@@ -16,3 +16,9 @@ html[data-season="winter"] .hero-leaves { background-image: url('../img/frame/da
 
 /* Zona di luar hero: layer di belakang konten */
 .leaf-zone > .hero-leaves { z-index: -1; }
+
+/* HP (< 768px): efek daun dimatikan total. Tablet dan laptop tetap pakai.
+   Pasangannya ada di js/leaves.js (return di awal). */
+@media (max-width: 767px) {
+  .hero-leaves { display: none; }
+}
