@@ -33,3 +33,28 @@
   .card-in { animation: none; opacity: 1; }
   .nav-btn, .nav-btn svg, .showcase-card { transition: none; }
 }
+
+/* ---- Teks hover di samping sidebar (hanya laptop dengan mouse) ---- */
+.nav-btn { position: relative; }
+
+.nav-tip {
+  position: absolute;
+  left: calc(100% + 14px);          /* muncul di sisi kanan tombol */
+  top: 50%;
+  transform: translate(-6px, -50%); /* posisi awal sedikit di kiri, lalu geser masuk */
+  padding: .4rem .8rem;
+  border-radius: .75rem;
+  background: #1c1c1c;
+  color: #e8e8e4;
+  font: 11px "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+  white-space: nowrap;
+  pointer-events: none;             /* tidak mengganggu klik */
+  opacity: 0;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+@media (hover: hover) {
+  .nav-btn:hover .nav-tip,
+  .nav-btn:focus-visible .nav-tip { opacity: 1; transform: translate(0, -50%); }
+}
