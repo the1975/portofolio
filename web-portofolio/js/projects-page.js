@@ -90,6 +90,85 @@
       : '<p class="text-sm text-ink/50 col-span-full">Belum ada project di sini.</p>';
   }
 
+    /* ---------- 5b. POPUP DETAIL ---------- */
+  const modal      = document.getElementById('projectModal');
+  const modalBody  = document.getElementById('pmBody');
+  const modalClose = document.getElementById('pmClose');
+
+  const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  // Cerita: string (pisahkan paragraf dengan baris kosong) atau array. Kosong -> pakai desc.
+  function storyHTML(p) {
+    const raw = p.story || p.desc || '';
+    const parts = Array.isArray(raw) ? raw : String(raw).split(/\n\s*\n/);
+    return parts.map((t) => '<p>' + t.trim() + '</p>').join('');
+  }
+
+  // Foto besar + deretan thumbnail (thumbnail hanya muncul kalau fotonya lebih dari 1)
+  function galleryHTML(p) {
+    const shots = p.shots || [];
+    const main =
+      '<div class="relative aspect-[16/10] rounded-2xl overflow-hidden bg-ink/5 grid place-items-center font-mono text-[10px] tracking-widest text-ink/30">' +
+        '<span>NO PREVIEW</span>' +
+        (shots[0] ? '<img id="pmMain" src="' + shots[0] + '" alt="' + p.title + '" decoding="async" ' +
+                    'class="absolute inset-0 w-full h-full object-contain" onerror="this.style.display=\'none\'">' : '') +
+      '</div>';
+    const thumbs = shots.length > 1
+      ? '<div class="flex gap-2 mt-3 overflow-x-auto pb-1">' + shots.map((s, i) =>
+          '<button type="button" data-shot="' + s + '" aria-label="Foto ' + (i + 1) + '" class="pm-thumb' + (i === 0 ? ' is-active' : '') + '">' +
+          '<img src="' + s + '" alt="" loading="lazy" onerror="this.style.display=\'none\'"></button>').join('') + '</div>'
+      : '';
+    return main + thumbs;
+  }
+
+  // Tombol link: yang pertama berisi (hitam), sisanya berbingkai. Panah ketikan diganti ikon.
+  function linksHTML(p) {
+    return (p.links || []).map((l, i) => {
+      const label = l.label.replace(/\s*[↗→]\s*$/, '');
+      const look = i === 0 ? 'bg-ink text-paper' : 'border border-ink';
+      return '<a href="' + l.url + '" target="_blank" rel="noopener" ' +
+        'class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-mono text-xs tracking-widest transition active:scale-95 ' + look + '">' +
+        label + ARROW + '</a>';
+    }).join('');
+  }
+
+  function openProject(i) {
+    const p = PROJECTS[i];
+    if (!p) return;
+    const cat = PROJECT_CATEGORIES.find((c) => c.key === p.category);
+
+    modalBody.innerHTML =
+      '<div class="grid md:grid-cols-[1.15fr_1fr] gap-8 md:gap-10 p-5 pt-16 md:p-10">' +
+        '<div>' + galleryHTML(p) + '</div>' +
+        '<div>' +
+          '<p class="font-mono text-[11px] tracking-widest text-ink/50 mb-4">' + (cat ? cat.label.toUpperCase() : '') + ' · ' + p.year + '</p>' +
+          '<h2 id="pmTitle" class="font-serif text-3xl md:text-4xl leading-tight md:pr-12">' + p.title + '</h2>' +
+          '<div class="flex flex-wrap gap-2 mt-4">' + p.tags.map((t) => '<span class="tag">' + t + '</span>').join('') + '</div>' +
+          '<div class="mt-6 space-y-4 text-sm md:text-[15px] font-light text-ink/75 leading-relaxed">' + storyHTML(p) + '</div>' +
+          '<div class="mt-8 flex flex-wrap gap-3">' + linksHTML(p) + '</div>' +
+        '</div>' +
+      '</div>';
+
+    modal.querySelector('.pm-scroll').scrollTop = 0;   // selalu mulai dari atas
+    document.documentElement.classList.add('modal-open');
+    modal.showModal();
+  }
+
+  // Tutup: tombol X, klik area gelap, atau tombol Esc (bawaan <dialog>)
+  modalClose.addEventListener('click', () => modal.close());
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
+  modal.addEventListener('close', () => document.documentElement.classList.remove('modal-open'));
+
+  // Ganti foto besar saat thumbnail ditekan
+  modal.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-shot]');
+    if (!t) return;
+    const main = document.getElementById('pmMain');
+    main.style.display = '';
+    main.src = t.dataset.shot;
+    modal.querySelectorAll('.pm-thumb').forEach((b) => b.classList.toggle('is-active', b === t));
+  });
+
   /* ---------- 6. EVENT ---------- */
   document.addEventListener('click', (e) => {
     const catBtn = e.target.closest('[data-cat]');
@@ -99,14 +178,17 @@
       renderList();
       return;
     }
-    // Klik kartu: popup detail dibuat di langkah berikutnya
-    // const openBtn = e.target.closest('[data-open]');
+        // Klik kartu -> buka popup
+    const openBtn = e.target.closest('[data-open]');
+    if (openBtn) openProject(Number(openBtn.dataset.open));
   });
 
   searchEl.addEventListener('input', () => {
     query = searchEl.value;
     renderList();
   });
+
+  
 
   /* ---------- 7. MULAI ---------- */
   buildNav();
