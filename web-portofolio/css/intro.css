@@ -20,15 +20,26 @@
 .intro-progress { position: absolute; top: 0; left: 0; width: 0; height: 3px; background: #1c1c1c; }
 .intro-progress.is-run { width: 100%; transition: width .55s cubic-bezier(.3, .7, .2, 1); }
 
-/* Tulisan merek di atas kolom */
+/* Tulisan merek: tiap huruf jatuh dari atas satu per satu (huruf dipecah oleh intro.js) */
 .intro-brand {
-  margin: 0 0 2rem;
+  margin: 0 0 2rem; visibility: hidden;            /* tersembunyi sampai JS selesai memecah huruf */
   font: 600 clamp(2.75rem, 11vw, 4.5rem)/1 "Space Grotesk", sans-serif;
   letter-spacing: -.03em;
 }
+.intro-brand.is-ready { visibility: visible; }
+.intro-brand span {
+  display: inline-block;
+  animation: intro-drop .5s cubic-bezier(.34, 1.56, .64, 1) both;
+  animation-delay: calc(var(--i) * 55ms);          /* jeda antar huruf */
+}
+@keyframes intro-drop {
+  from { opacity: 0; transform: translateY(-1.1em); }
+  to   { opacity: 1; transform: none; }
+}
 
 /* Kolom pencarian */
-.intro-search { position: relative; width: min(36rem, 100%); }
+.intro-search {   position: relative; width: min(36rem, 100%);   opacity: 0; transform: translateY(10px);   transition: opacity .4s ease, transform .4s ease; } 
+.intro-search.is-in { opacity: 1; transform: none; }
 .intro-bar {
   display: flex; align-items: center; gap: .9rem;
   height: 3.5rem; padding: 0 1.25rem;
