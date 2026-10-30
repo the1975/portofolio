@@ -30,6 +30,11 @@
   const progress = document.getElementById('introProgress');
   const query = intro.dataset.query || '';
   const suggest = (intro.dataset.suggest || '').split('|').filter(Boolean);
+    /* ---------- 0. HURUF MEREK: pecah per huruf supaya bisa jatuh satu-satu ---------- */
+  const brand = intro.querySelector('.intro-brand');
+  brand.innerHTML = [...brand.textContent.trim()]
+    .map((c, i) => '<span style="--i:' + i + '">' + c + '</span>').join('');
+  brand.classList.add('is-ready');
 
   const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -50,8 +55,10 @@
   }
 
   /* ---------- 2. ALUR ---------- */
-  async function play() {
-    await sleep(700);                                  // jeda sebelum mengetik
+    async function play() {
+    await sleep(800);                                  // huruf merek jatuh satu per satu
+    search.classList.add('is-in');                     // kolom pencarian muncul
+    await sleep(450);
     bar.classList.add('is-focus');
 
     let typed = '';
@@ -62,13 +69,13 @@
       hits = renderSuggest(typed);                     // daftar menyempit tiap huruf
       await sleep(TYPE_MIN + Math.random() * TYPE_VAR);
     }
-    await sleep(500);
+    await sleep(400);
 
     // "Panah bawah": saran pertama terpilih, teks kolom berubah jadi saran lengkap
     if (hits.length) {
       list.firstElementChild.classList.add('is-hit');
       text.textContent = hits[0];
-      await sleep(600);
+      await sleep(500);
     }
 
     // "Enter": kolom ditekan, daftar menutup, garis loading berjalan
@@ -76,7 +83,7 @@
     search.classList.remove('is-open');
     await sleep(250);
     progress.classList.add('is-run');
-    await sleep(550);
+    await sleep(500);
   }
 
   /* ---------- 3. KELUAR: layar naik lalu dibuang ---------- */
