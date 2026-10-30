@@ -113,3 +113,9 @@
   setActive();
   renderList();
 })();
+
+    // Sidebar laptop: ikon + teks yang muncul saat di-hover
+    sideEl.innerHTML = PROJECT_CATEGORIES.map((c) =>
+      '<button type="button" data-cat="' + c.key + '" aria-label="' + c.label + '" ' +
+      'class="nav-btn w-11 h-11 rounded-2xl grid place-items-center">' + icon(c.key) +
+      '<span class="nav-tip">' + c.label + '</span></button>').join('');
