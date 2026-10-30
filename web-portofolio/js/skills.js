@@ -38,7 +38,6 @@
   const elTitle = document.getElementById('certTitle');
   const elMeta  = document.getElementById('certMeta');
   const elDesc  = document.getElementById('certDesc');
-  const elLink  = document.getElementById('certLink');
   const elCount = document.getElementById('certCount');
   const btnPrev = document.getElementById('certPrev');
   const btnNext = document.getElementById('certNext');
@@ -93,7 +92,6 @@
       elTitle.textContent = c.title;
       elMeta.textContent = (c.issuer + ' · ' + c.date).toUpperCase();
       elDesc.textContent = c.desc;
-      elLink.href = c.link || '#';
       info.style.opacity = 1;
     }, 180);
 
