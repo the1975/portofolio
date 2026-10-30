@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semua Project | Leonardo Yanuarianto</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+  <!-- Tema sama persis dengan index.html (warna + font) -->
+  <style type="text/tailwindcss">
+    @theme {
+      --font-sans: "Manrope", sans-serif;
+      --font-serif: "Space Grotesk", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --color-paper: #e8e8e4;
+      --color-ink: #1c1c1c;
+    }
+    @layer base { .font-serif { letter-spacing: -0.03em; font-weight: 600; } }
+  </style>
+  <link rel="stylesheet" href="css/base.css">
+</head>
+
+<body class="font-sans text-ink">
+  <div class="frame-bg p-3 md:p-6 min-h-screen">
+    <div class="bg-paper rounded-3xl shadow-2xl md:flex overflow-hidden min-h-[calc(100vh-1.5rem)] md:min-h-[calc(100vh-3rem)]">
+
+      <!-- SIDEBAR: hanya laptop. Isi tombol dibuat JS dari PROJECT_CATEGORIES -->
+      <aside class="hidden md:flex flex-col items-center w-20 shrink-0 py-8 border-r border-ink/10">
+        <a href="index.html#projects" aria-label="Kembali ke beranda"
+           class="w-10 h-10 rounded-full bg-ink text-paper grid place-items-center font-serif italic text-sm mb-8">L</a>
+        <nav id="sideNav" class="flex flex-col gap-2" aria-label="Kategori project"></nav>
+      </aside>
+
+      <main class="flex-1 min-w-0 px-5 md:px-10 pt-6 md:pt-8 pb-32 md:pb-12">
+
+        <!-- TOP BAR: tombol kembali (HP) + kolom search -->
+        <div class="flex items-center gap-3">
+          <a href="index.html#projects" aria-label="Kembali"
+             class="md:hidden w-11 h-11 shrink-0 rounded-2xl bg-white grid place-items-center font-mono">←</a>
+          <label class="flex-1 flex items-center gap-3 bg-white rounded-2xl px-4 py-3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" class="w-5 h-5 text-ink/40"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input id="searchInput" type="search" placeholder="Cari project..." autocomplete="off"
+                   class="w-full bg-transparent outline-none text-sm placeholder:text-ink/40">
+          </label>
+        </div>
+
+        <!-- JUDUL: berubah sesuai kategori yang dipilih -->
+        <p class="font-mono text-xs tracking-widest text-ink/50 mt-10 mb-3">ALL WORK</p>
+        <h1 id="listTitle" class="font-serif text-4xl md:text-6xl">Semua Project</h1>
+        <p id="listCount" class="font-mono text-xs tracking-widest text-ink/50 mt-3"></p>
+
+        <!-- TEMPAT KARTU (diisi JS) -->
+        <div id="projectList" class="mt-8"></div>
+      </main>
+    </div>
+  </div>
+
+  <!-- BAR BAWAH: hanya HP, efek kaca halus -->
+  <nav id="bottomNav" aria-label="Kategori project"
+       class="md:hidden fixed bottom-5 left-4 right-4 mx-auto max-w-md z-40 flex gap-1 p-1.5 rounded-2xl bg-white/80 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,.12)]"></nav>
+
+  <script src="js/projects-data.js"></script>
+  <script src="js/projects-page.js"></script>
+</body>
+  
+</html>
