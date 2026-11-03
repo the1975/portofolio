@@ -1,0 +1,47 @@
+/* ==========================================================
+   css/sea.css - Latar laut (foto + overlay) dan warna terang
+   Ini mengasah: layering z-index dan menimpa gaya lama lewat cascade
+   ========================================================== */
+
+/* Lapisan foto. Dipasang di belakang isi hero (z-index 0) */
+.sea-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #0e1116 url('../img/frame/laut.jpg') center / cover no-repeat;
+}
+/* Overlay gelap 35%: supaya teks putih tetap terbaca */
+.sea-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .35);
+}
+
+/* Judul dan teks kecil jadi putih */
+.hero-sea h1                { color: #fff; }
+.hero-sea .text-ink\/70     { color: rgba(255, 255, 255, .85); }  /* teks mengetik */
+.hero-sea .text-ink\/50     { color: rgba(255, 255, 255, .65); }  /* label kecil */
+.hero-sea .text-ink\/30     { color: rgba(255, 255, 255, .40); }  /* tanda ">" */
+.hero-sea .border-ink\/10   { border-color: rgba(255, 255, 255, .18); }
+
+/* Kursor berkedip dan tombol Download CV: dari gelap jadi putih */
+.hero-sea #typed + span                  { background: #fff; }
+.hero-sea a[href*="drive.google.com"]    { background: #fff; color: #0e1116; }
+
+/* Tombol sosmed */
+.hero-sea .social-btn         { color: #fff; background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .3); }
+.hero-sea .social-btn:hover   { background: #fff; color: #0e1116; }
+
+/* Dekorasi: label dan lingkaran */
+.hero-sea .hero-label                  { color: rgba(255, 255, 255, .55); }
+.hero-sea .hero-decoration::before     { border-color: rgba(255, 255, 255, .18); }
+.hero-sea .hero-decoration::after      { border-color: rgba(255, 255, 255, .10); }
+
+/* Chip mindset tetap putih kaca, jadi teksnya harus tetap gelap */
+.hero-sea .hero-chip-glitch   { color: #1c1c1c; }
+
+/* Efek glitch: merah/biru tua tidak kelihatan di atas laut, ganti yang terang */
+.hero-sea .hero-glitch::before { color: #ff5c7a; }
+.hero-sea .hero-glitch::after  { color: #5cd6ff; }
