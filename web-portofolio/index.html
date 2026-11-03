@@ -76,6 +76,7 @@
   <link rel="stylesheet" href="css/moments.css">
   <link rel="stylesheet" href="css/music.css">
   <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/sea.css">
   <script src="js/season.js"></script>   <!-- pilih gambar frame sesuai musim, harus di head -->
 </head>
 
@@ -131,24 +132,16 @@
 
       <!-- ============ HERO ============ -->
       <section
-        class="hero relative md:min-h-screen bg-paper rounded-3xl overflow-hidden px-6 md:px-16 pt-36 pb-16 grid md:grid-cols-2 gap-8 md:gap-12 items-center shadow-2xl"
-        style="background: radial-gradient(circle 420px at 72% 50%, #bfc1c1 0%, #e8e8e4 38%, #f2f2f0 72%, #fafafa 100%);">
+        class="hero hero-sea relative md:min-h-screen bg-night rounded-3xl overflow-hidden px-6 md:px-16 pt-36 pb-16 grid md:grid-cols-2 gap-8 md:gap-12 items-center shadow-2xl">
 
-        <!-- Daun musiman: muncul di sekitar kursor (hero.js bagian 06) -->
-        <div class="hero-leaves" aria-hidden="true"></div>
+        <!-- Latar laut: foto + overlay (gaya di css/sea.css) -->
+        <div class="sea-bg" aria-hidden="true"></div>
 
         <!-- Dekorasi: lingkaran + label kecil -->
         <div class="hero-decoration" aria-hidden="true">
           <span class="hero-label hero-label-1">WEB × DATA</span>
           <span class="hero-label hero-label-2">SYSTEM / 01</span>
         </div>
-
-        <!-- Dekorasi: grid garis tipis -->
-        <div class="pointer-events-none absolute inset-0"
-             style="background-image: linear-gradient(rgba(28,28,28,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(28,28,28,.045) 1px, transparent 1px);
-                    background-size: 56px 56px;
-                    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 45%, #000 20%, transparent 75%);
-                    mask-image: radial-gradient(ellipse 70% 60% at 70% 45%, #000 20%, transparent 75%);"></div>
 
         <!-- Kolom kiri: teks -->
         <div class="relative z-10">
