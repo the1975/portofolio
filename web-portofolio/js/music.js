@@ -58,7 +58,7 @@
     startLoading();
     frame.classList.add('is-swapping');           // pudarkan iframe lama
     setTimeout(() => {
-      frame.src = 'https://open.spotify.com/embed/playlist/' + PLAYLISTS[index].id + '?utm_source=generator';
+      frame.src = 'https://open.spotify.com/embed/playlist/' + PLAYLISTS[index].id + '?utm_source=generator&theme=0';
     }, 250);
   }
 
