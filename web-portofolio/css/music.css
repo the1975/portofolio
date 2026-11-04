@@ -75,3 +75,26 @@
 @media (prefers-reduced-motion: reduce) {
   .music-loading { animation: none; }
 }
+
+/* ===== On Repeat: latar kolam (foto + overlay) ===== */
+/* Latar ditaruh di z-index -1 (section sudah isolate) supaya ada di belakang isi */
+.pond-bg {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: #0b1814 url('../img/frame/kolam.webp') center / cover no-repeat;
+}
+/* Overlay gelap 25%: jaga teks putih tetap terbaca */
+.pond-bg::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, .25); }
+
+/* Semua teks section jadi putih */
+.music-pond { color: #fff; }
+.music-pond .text-ink\/70 { color: rgba(255, 255, 255, .85); }
+.music-pond .text-ink\/60 { color: rgba(255, 255, 255, .70); }
+.music-pond .text-ink\/50 { color: rgba(255, 255, 255, .65); }
+.music-pond .text-ink\/40 { color: rgba(255, 255, 255, .50); }
+
+/* Equalizer, tumpukan kartu playlist, dan tombol panah ikut terang */
+.music-pond .eq i { background: #fff; }
+.music-pond .music-stack::before,
+.music-pond .music-stack::after { background: #fff; }
+.music-pond .shot-btn { border-color: rgba(255, 255, 255, .3); }
+.music-pond .shot-btn:hover { background: #fff; color: #0e1116; }
