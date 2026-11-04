@@ -168,3 +168,22 @@
 
 /* Di On Repeat, cincin ditaruh di belakang teks dan player (di atas foto kolam) */
 .music-pond .ripple-ring { z-index: -1; }
+
+/* ===== Tata letak hero ===== */
+
+/* Layar lebar (laptop, tablet landscape): teks kiri, foto kanan, satu baris sejajar.
+   Posisi kolom ditentukan eksplisit supaya tidak bergantung pada kelas order Tailwind. */
+@media (min-width: 768px) and (orientation: landscape) {
+  .hero > div.relative.z-10 { grid-column: 1; grid-row: 1; align-self: center; }   /* kolom teks */
+  .hero > div:last-of-type  { grid-column: 2; grid-row: 1; align-self: center; order: 0; }  /* kolom foto */
+}
+
+/* Layar portrait (HP, termasuk mode "Desktop site"): satu kolom, foto di atas teks */
+@media (orientation: portrait) {
+  .hero {
+    grid-template-columns: 1fr;   /* menimpa md:grid-cols-2 */
+    min-height: 0;                /* menimpa md:min-h-screen */
+    align-content: start;
+  }
+  .hero > div:last-of-type { order: -1; justify-self: center; }  /* kolom foto naik ke atas */
+}
