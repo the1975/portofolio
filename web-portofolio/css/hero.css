@@ -166,16 +166,5 @@
   .hero-chip-glitch { display: none !important; }
 }
 
-/* ===== Riak saat hero diketuk ===== */
-.ripple-ring {
-  position: absolute; z-index: 1; pointer-events: none;
-  width: 300px; height: 300px; margin: -150px 0 0 -150px;  /* pusat tepat di titik ketuk */
-  border: 1px solid rgba(28, 28, 28, .35);
-  border-radius: 50%;
-  transform: scale(0); opacity: 0;
-  animation: ripple 1.5s ease-out forwards;
-}
-@keyframes ripple {
-  0%   { transform: scale(0); opacity: .9; }
-  100% { transform: scale(1); opacity: 0; }
-}
+/* Di On Repeat, cincin ditaruh di belakang teks dan player (di atas foto kolam) */
+.music-pond .ripple-ring { z-index: -1; }
