@@ -187,3 +187,11 @@
   }
   .hero > div:last-of-type { order: -1; justify-self: center; }  /* kolom foto naik ke atas */
 }
+
+/* Hero portrait: rapatkan jarak atas-bawah supaya tidak kepanjangan */
+@media (orientation: portrait) {
+  .hero { padding-top: 6.5rem; padding-bottom: 2.5rem; row-gap: 1.5rem; }
+  .hero > div:last-of-type { max-width: 220px; }   /* foto lebih kecil */
+  .hero-label-2 { bottom: 1.25rem; }                /* tetap px, bukan % */
+}
+
