@@ -1,6 +1,5 @@
 /* =========================
-   css/hero.css - Hero: dekorasi, glitch headline, chip mindset (section 04-05)
-   Urutan muat di <head> index.html: 2 dari 7
+   css/hero.css - Hero: dekorasi, glitch headline, chip mindset, tata letak
 ============================*/
 
 /*===========================
@@ -49,7 +48,7 @@
 .hero-label-2 { bottom: 12%; left: 7%; }
 
 /* --- Glitch headline "Hi, I'm Leonardo." ---
-   Class .glitch-active ditoggle oleh JS (js/script.js bagian 11) */
+   Class .glitch-active ditoggle oleh JS (js/hero.js) */
 .hero-glitch {
   position: relative;
   display: inline-block;
@@ -169,13 +168,16 @@
 /* Di On Repeat, cincin ditaruh di belakang teks dan player (di atas foto kolam) */
 .music-pond .ripple-ring { z-index: -1; }
 
-/* ===== Tata letak hero ===== */
+
+/* ==========================================================
+   06. HERO: TATA LETAK
+   ========================================================== */
 
 /* Layar lebar (laptop, tablet landscape): teks kiri, foto kanan, satu baris sejajar.
    Posisi kolom ditentukan eksplisit supaya tidak bergantung pada kelas order Tailwind. */
 @media (min-width: 768px) and (orientation: landscape) {
-  .hero > div.relative.z-10 { grid-column: 1; grid-row: 1; align-self: center; }   /* kolom teks */
-  .hero > div:last-of-type  { grid-column: 2; grid-row: 1; align-self: center; order: 0; }  /* kolom foto */
+  .hero > div.relative.z-10 { grid-column: 1; grid-row: 1; align-self: center; }          /* kolom teks */
+  .hero > div:last-of-type  { grid-column: 2; grid-row: 1; align-self: center; order: 0; } /* kolom foto */
 }
 
 /* Layar portrait (HP, termasuk mode "Desktop site"): satu kolom, foto di atas teks */
@@ -184,14 +186,11 @@
     grid-template-columns: 1fr;   /* menimpa md:grid-cols-2 */
     min-height: 0;                /* menimpa md:min-h-screen */
     align-content: start;
+    padding-top: 6.5rem;          /* rapatkan jarak atas supaya hero tidak kepanjangan */
+    padding-bottom: 2.5rem;
+    row-gap: 1.5rem;
   }
-  .hero > div:last-of-type { order: -1; justify-self: center; }  /* kolom foto naik ke atas */
+  .hero > div:last-of-type { order: -1; justify-self: center; max-width: 220px; }  /* foto naik ke atas, lebih kecil */
+  .hero-label-2 { bottom: 1.25rem; }          /* pakai satuan tetap, bukan % */
+  .hero-chip-glitch { display: none !important; }   /* chip menutupi foto yang kecil */
 }
-
-/* Hero portrait: rapatkan jarak atas-bawah supaya tidak kepanjangan */
-@media (orientation: portrait) {
-  .hero { padding-top: 6.5rem; padding-bottom: 2.5rem; row-gap: 1.5rem; }
-  .hero > div:last-of-type { max-width: 220px; }   /* foto lebih kecil */
-  .hero-label-2 { bottom: 1.25rem; }                /* tetap px, bukan % */
-}
-
